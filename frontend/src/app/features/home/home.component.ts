@@ -294,8 +294,10 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
   styles: [`
     /* Hero */
     .hero { background: var(--r-ink); color: #FFFFFF; position: relative; overflow: hidden; }
-    .hero__inner { padding-top: 72px; padding-bottom: 140px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
-    .hero__copy { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+    .hero__inner { padding-top: 48px; padding-bottom: 132px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
+    .hero__copy { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+    /* El título se achica con la pantalla para que el hero entre completo al abrir la página. */
+    .hero__copy .r-h1 { font-size: clamp(44px, min(5.2vw, 8.5vh), 84px); line-height: 0.95; }
     .hero__eyebrow { font-size: 18px; color: var(--r-red-soft); }
     .hero__accent { color: var(--r-red); }
     .hero__text { margin: 0; font-size: 20px; line-height: 1.55; color: #C9CBD1; max-width: 520px; white-space: pre-line; }
@@ -305,8 +307,9 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .hero__slash { position: absolute; inset: 8% -20% 8% 10%; background: var(--r-red); transform: skewX(-12deg); }
     .hero__photo { position: relative; aspect-ratio: 4 / 3; background: var(--r-ink-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #34363E; overflow: hidden; }
     /* Con imagen cargada el recuadro toma la proporción de la foto: se ve entera, sin recortes. */
-    .hero__photo--img { aspect-ratio: auto; background: #FFFFFF; }
-    .hero__photo--img img { position: static; display: block; width: 100%; height: auto; max-height: 640px; object-fit: contain; }
+    /* El alto se limita a lo que entra en pantalla (header y buscador incluidos) y el ancho se ajusta a la foto. */
+    .hero__photo--img { aspect-ratio: auto; background: transparent; border: 0; width: fit-content; max-width: 100%; margin: 0 auto; }
+    .hero__photo--img img { position: static; display: block; width: auto; max-width: 100%; height: auto; max-height: max(340px, calc(100vh - 300px)); object-fit: contain; box-shadow: 0 24px 50px rgba(0,0,0,0.35); }
     .hero__photo-tag { font-family: var(--r-display); font-size: 16px; letter-spacing: 0.18em; color: var(--r-grey); }
 
     /* Buscador */
