@@ -22,6 +22,11 @@ class SettingController extends Controller
             'legal_cuit' => ['label' => 'CUIT', 'type' => 'text'],
             'business_hours' => ['label' => 'Horarios', 'type' => 'text', 'help' => 'Ej.: Lunes a viernes 9 a 19 h · Sábados 9 a 13 h'],
         ]],
+        ['key' => 'marca', 'label' => 'Marca (logo con texto)', 'icon' => 'badge-tm', 'settings' => [
+            'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo, junto al ícono. Ej.: RODADO. Vacío = RODADO.'],
+            'brand_sub' => ['label' => 'Texto secundario', 'type' => 'text', 'help' => 'Texto chico al lado del nombre. Ej.: MOTOS. Vacío = MOTOS.'],
+            'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = recuadro rojo con la moto. Si cargás un "Logo del sitio" en Imágenes, ese logo reemplaza a todo esto.'],
+        ]],
         ['key' => 'contacto', 'label' => 'Contacto', 'icon' => 'telephone', 'settings' => [
             'contact_address' => ['label' => 'Dirección del showroom', 'type' => 'text', 'help' => 'Se usa también para el mapa del inicio.'],
             'contact_phone' => ['label' => 'Teléfono', 'type' => 'tel'],
@@ -100,7 +105,7 @@ class SettingController extends Controller
             Setting::set($key, '');
         } else {
             // El logo puede ser SVG; las fotos, sólo formatos de imagen comunes.
-            $mimes = $key === 'site_logo' ? 'mimes:jpg,jpeg,png,webp,svg' : 'mimes:jpg,jpeg,png,webp';
+            $mimes = in_array($key, ['site_logo', 'brand_icon'], true) ? 'mimes:jpg,jpeg,png,webp,svg' : 'mimes:jpg,jpeg,png,webp';
             $request->validate(['image' => ['required', 'file', $mimes, 'max:6144']]);
             $path = $request->file('image')->store('site', 'public');
             $this->deleteStored($old);
