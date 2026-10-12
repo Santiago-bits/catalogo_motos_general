@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use App\Models\SearchLog;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -28,8 +27,6 @@ class SearchController extends Controller
             ->with(['brand', 'category', 'mainImage', 'moto'])
             ->limit(24)
             ->get();
-
-        SearchLog::create(['term' => $term, 'results_count' => $products->count()]);
 
         return ProductResource::collection($products);
     }

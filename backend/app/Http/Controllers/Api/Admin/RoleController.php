@@ -53,6 +53,9 @@ class RoleController extends Controller
     {
         $data = $this->validated($request, $role);
 
+        // Sin esto, alguien con "roles.manage" podría sumarse permisos editando su propio rol.
+        abort_if(! $request->user()->isAdmin() && (int) $role->id === (int) $request->user()->role_id, 403, 'No podés editar tu propio rol. Pedíselo a un administrador.');
+
         $role->update([
             'name' => $data['name'],
             'description' => $data['description'] ?? null,

@@ -50,8 +50,11 @@ Route::get('/ajustes', [SettingController::class, 'index']);
 Route::get('/servicios', [ServiceController::class, 'index']);
 Route::get('/servicios/{slug}', [ServiceController::class, 'show']);
 
-Route::post('/consultas', [InquiryController::class, 'store']);
-Route::post('/cotizador', [QuoteController::class, 'store']);
+// Formularios públicos: hasta 10 envíos por minuto por IP, para frenar el spam.
+Route::middleware('throttle:10,1')->group(function () {
+    Route::post('/consultas', [InquiryController::class, 'store']);
+    Route::post('/cotizador', [QuoteController::class, 'store']);
+});
 
 Route::middleware('throttle:15,10')->group(function () {
     Route::post('/admin/login', [AdminAuthController::class, 'login']);

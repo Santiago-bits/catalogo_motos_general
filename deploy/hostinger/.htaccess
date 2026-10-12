@@ -12,6 +12,9 @@ Options -Indexes -MultiViews
     RewriteRule ^laravel(/|$) - [F,L]
     RewriteRule (^|/)\.(?!well-known/) - [F,L]
 
+    # En las subidas del panel nunca se ejecuta código, aunque alguien logre subir un script.
+    RewriteRule ^storage/.*\.(php\d?|phtml|phar|pl|py|cgi|sh|html?)$ - [F,L,NC]
+
     # Pasar el token del panel a PHP.
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -39,6 +42,15 @@ Options -Indexes -MultiViews
     <FilesMatch "^index\.html$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
     </FilesMatch>
+    # Un SVG subido (logo, ícono, marca) puede traer <script>: abierto directo no ejecuta nada.
+    <FilesMatch "\.svgz?$">
+        Header set Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline'; img-src data:; sandbox"
+        Header set X-Content-Type-Options "nosniff"
+    </FilesMatch>
+    # Cabeceras básicas de seguridad para todo el sitio.
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
 <IfModule mod_deflate.c>

@@ -9,7 +9,6 @@ interface DashboardData {
   review: { label: string; count: number; route: string; flag: string; icon: string; query?: Record<string, string> }[];
   inquiries: { id: number; name: string; message: string | null; status: string; created_at: string; product?: { id: number; name: string } | null }[];
   top_products: { id: number; name: string; type: string; views: number }[];
-  top_searches: { term: string; total: number }[];
 }
 
 @Component({

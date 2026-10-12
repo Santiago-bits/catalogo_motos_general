@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { map, of } from 'rxjs';
+import { map } from 'rxjs';
 import { AuthService } from './auth.service';
 
 export const authGuard: CanActivateFn = () => {
@@ -30,10 +30,4 @@ export const permissionGuard: CanActivateFn = (route) => {
   if (auth.user()) return decide();
 
   return auth.fetchMe().pipe(map(() => decide()));
-};
-
-export const guestGuard: CanActivateFn = () => {
-  const auth = inject(AuthService);
-  const router = inject(Router);
-  return auth.isAuthenticated() ? router.createUrlTree(['/admin']) : of(true);
 };

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
         'type', 'code', 'name', 'slug', 'brand_id', 'category_id',
@@ -113,23 +112,6 @@ class Product extends Model
         return $this->hasMany(Inquiry::class);
     }
 
-    public function priceHistories(): HasMany
-    {
-        return $this->hasMany(PriceHistory::class)->latest('id');
-    }
-
-    public function compatibleRepuestos(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class, 'moto_repuestos', 'moto_id', 'repuesto_id')
-            ->withPivot(['note', 'recommended']);
-    }
-
-    public function compatibleMotos(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class, 'moto_repuestos', 'repuesto_id', 'moto_id')
-            ->withPivot(['note', 'recommended']);
-    }
-
     public function scopeType($query, string $type)
     {
         return $query->where('type', $type);
@@ -143,11 +125,6 @@ class Product extends Model
     public function scopeFeatured($query)
     {
         return $query->where('featured', true);
-    }
-
-    public function displayPrice(): ?string
-    {
-        return $this->is_offer && $this->offer_price ? $this->offer_price : $this->final_price;
     }
 
     protected static function booted(): void

@@ -479,7 +479,6 @@ export class HomeComponent implements OnInit {
   finder = { condicion: '', categoria: '', marca: '', precio_max: '' };
 
   tradeIn = { brand: '', model: '', year: '', km: '', name: '' };
-  tradeInSending = signal(false);
   tradeInSent = signal(false);
   tradeInError = signal('');
 

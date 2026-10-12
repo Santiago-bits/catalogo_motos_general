@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Inquiry;
 use App\Models\Product;
 use App\Models\Quote;
-use App\Models\SearchLog;
 use App\Models\Service;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -37,12 +36,9 @@ class DashboardController extends Controller
             'featured' => Product::where('featured', true)->where('active', true)->count(),
             'offers' => Product::where('is_offer', true)->where('active', true)->count(),
             'inactive' => Product::where('active', false)->count(),
-            'stock_units' => (int) Product::where('stock_qty', '>', 0)->sum('stock_qty'),
-            'stock_out' => Product::where('active', true)->where('stock_qty', '<=', 0)->count(),
             'inquiries_new' => Inquiry::where('status', 'nueva')->count(),
             'inquiries_total' => Inquiry::count(),
             'quotes_pending' => Quote::where('status', 'pendiente')->count(),
-            'quotes_total' => Quote::count(),
         ];
 
         return response()->json([
@@ -50,12 +46,6 @@ class DashboardController extends Controller
             'review' => $this->review(),
             'inquiries' => Inquiry::with('product:id,name')->latest()->limit(6)->get(['id', 'name', 'email', 'phone', 'message', 'status', 'source', 'product_id', 'created_at']),
             'top_products' => Product::active()->orderByDesc('views')->limit(5)->get(['id', 'name', 'type', 'views']),
-            'top_searches' => SearchLog::query()
-                ->selectRaw('term, count(*) as total')
-                ->groupBy('term')
-                ->orderByDesc('total')
-                ->limit(5)
-                ->get(),
         ]);
     }
 

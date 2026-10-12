@@ -181,7 +181,6 @@ class StockController extends Controller
             'products' => Product::count(),
             'out' => Product::where('stock_qty', '<=', 0)->count(),
             'low' => self::lowStock(Product::query())->count(),
-            'movements_today' => StockMovement::whereDate('created_at', today())->count(),
         ];
     }
 }

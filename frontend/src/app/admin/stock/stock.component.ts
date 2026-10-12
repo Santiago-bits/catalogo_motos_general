@@ -34,7 +34,6 @@ interface Summary {
   products: number;
   out: number;
   low: number;
-  movements_today: number;
 }
 
 const SECTIONS = [
