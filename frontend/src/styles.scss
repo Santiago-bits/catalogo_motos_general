@@ -184,7 +184,7 @@ textarea.r-input { resize: vertical; min-height: 110px; }
 .r-crumbs a:hover { color: var(--r-white); }
 
 .r-status { padding: 48px 0; text-align: center; color: var(--r-muted); font-size: 17px; }
-.r-grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+.r-grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 24px; }
 
 @media (max-width: 640px) {
   .r-h1 { font-size: 56px; }

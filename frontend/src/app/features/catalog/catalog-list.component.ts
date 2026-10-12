@@ -156,6 +156,8 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
       .filters__form .r-input { min-height: 44px; padding: 8px 10px; font-size: 15px; }
       .filters__sort, .filters__btn { grid-column: 1 / -1; }
     }
+    /* Teléfonos muy angostos: una columna para que no se corten los textos. */
+    @media (max-width: 370px) { .filters__form { grid-template-columns: 1fr; } }
     .results { padding-top: 56px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 32px; }
     .results__head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
     .results__count { margin: 0; font-size: 17px; color: var(--r-muted-2); }
