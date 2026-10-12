@@ -89,14 +89,15 @@ function loadGoogleScript(): Promise<any> {
   styles: [`
     .login { min-height: 100vh; display: flex; flex-wrap: wrap; background: var(--r-paper); }
 
-    .login__hero { flex: 1 1 480px; min-width: 0; background: var(--r-ink); color: #FFFFFF; padding: 40px 48px; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; position: relative; overflow: hidden; }
+    .login__hero { flex: 1 1 480px; min-width: 0; background: var(--r-ink); color: #FFFFFF; padding: 40px 48px; display: flex; flex-direction: column; gap: 48px; position: relative; overflow: hidden; }
     .brand { display: flex; align-items: center; gap: 12px; color: #FFFFFF; text-decoration: none; position: relative; z-index: 1; }
     .brand:hover { color: #FFFFFF; }
     .brand__mark { width: 44px; height: 44px; background: var(--r-red); display: flex; align-items: center; justify-content: center; transform: skewX(-10deg); }
     .brand__name { font-family: var(--r-display); font-weight: 800; font-size: 30px; letter-spacing: 0.04em; line-height: 1; }
     .dot { color: var(--r-red); }
     .brand__sub { font-weight: 500; color: var(--r-grey); font-size: 22px; letter-spacing: 0.12em; }
-    .hero__copy { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1; max-width: 520px; }
+    /* Centrado y un poco por encima de la mitad del panel. */
+    .hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; position: relative; z-index: 1; max-width: 560px; margin: auto; transform: translateY(-8vh); }
     .hero__eyebrow { color: var(--r-red-soft); }
     .hero__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 76px; line-height: 0.92; text-transform: uppercase; }
     .hero__title span { color: var(--r-red); }
@@ -118,6 +119,7 @@ function loadGoogleScript(): Promise<any> {
     @media (max-width: 640px) {
       .login__hero { padding: 28px 20px; gap: 32px; }
       .hero__title { font-size: 52px; }
+      .hero__copy { transform: none; }
       .login__form { padding: 32px 22px; }
     }
     .brand__logo { display: block; height: 52px; width: auto; max-width: 240px; object-fit: contain; }
