@@ -19,10 +19,6 @@ import { SiteService } from '../../core/services/site.service';
           } @else {
           @if (site.brandIcon(); as icon) {
             <img class="brand__icon" [src]="icon" alt="" />
-          } @else {
-          <span class="brand__mark">
-            <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="16.5" r="3.5"></circle><circle cx="18.5" cy="16.5" r="3.5"></circle><path d="M5.5 16.5 10 9h5l3.5 7.5"></path><path d="M14 6h3l1.5 3"></path></svg>
-          </span>
           }
           <span class="brand__name">{{ site.brandName() }}<span class="brand__dot">.</span> <span class="brand__sub">{{ site.brandSub() }}</span></span>
           }
