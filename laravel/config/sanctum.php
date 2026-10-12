@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'expiration' => null,
+    'expiration' => env('SANCTUM_EXPIRATION', 10080), // minutos: la sesión del panel dura 7 días
 
     /*
     |--------------------------------------------------------------------------

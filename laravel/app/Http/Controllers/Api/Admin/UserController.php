@@ -33,6 +33,7 @@ class UserController extends Controller
             'must_change_password' => ['boolean'],
         ], ['email.unique' => 'Ya hay un usuario con ese email.']);
 
+        $this->guardAdminScope($request, null, (int) $data['role_id']);
         $data['role'] = $this->legacyRole((int) $data['role_id']);
         $user = User::create($data);
 
@@ -53,6 +54,8 @@ class UserController extends Controller
             'active' => ['boolean'],
             'must_change_password' => ['boolean'],
         ]);
+
+        $this->guardAdminScope($request, $user, (int) $data['role_id']);
 
         $isSelf = $user->id === $request->user()->id;
         if ($isSelf && (! ($data['active'] ?? true) || (int) $data['role_id'] !== (int) $user->role_id)) {
@@ -79,6 +82,7 @@ class UserController extends Controller
     public function destroy(Request $request, User $user)
     {
         abort_if($user->id === $request->user()->id, 422, 'No podés eliminar tu propio usuario.');
+        $this->guardAdminScope($request, $user, null);
 
         $activeAdmins = User::where('active', true)->whereHas('roleModel', fn ($q) => $q->where('is_system', true))->count();
         abort_if($user->isAdmin() && $activeAdmins <= 1, 422, 'Es el único administrador activo: no se puede eliminar.');
@@ -88,6 +92,19 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['ok' => true]);
+    }
+
+    /**
+     * Quien tiene "users.manage" sin ser administrador no puede crear administradores
+     * ni tocar a uno (cambiarle la contraseña sería quedarse con su cuenta).
+     */
+    private function guardAdminScope(Request $request, ?User $target, ?int $roleId): void
+    {
+        if ($request->user()->isAdmin()) {
+            return;
+        }
+        abort_if($roleId && Role::find($roleId)?->is_system, 403, 'Sólo un administrador puede asignar el rol de administrador.');
+        abort_if($target?->isAdmin(), 403, 'Sólo un administrador puede modificar a otro administrador.');
     }
 
     /** La columna vieja "role" (admin/editor) se mantiene en sync por compatibilidad. */

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3492741706fa63068ec0b91d799e9561
+class ComposerStaticInit76e94e85bb6860948fe793bc8e9feec2
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -538,7 +538,6 @@ class ComposerStaticInit3492741706fa63068ec0b91d799e9561
         'App\\Models\\RepuestoCode' => __DIR__ . '/../..' . '/app/Models/RepuestoCode.php',
         'App\\Models\\RepuestoCompatibility' => __DIR__ . '/../..' . '/app/Models/RepuestoCompatibility.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
-        'App\\Models\\SearchLog' => __DIR__ . '/../..' . '/app/Models/SearchLog.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\StockMovement' => __DIR__ . '/../..' . '/app/Models/StockMovement.php',
@@ -684,27 +683,6 @@ class ComposerStaticInit3492741706fa63068ec0b91d799e9561
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
-        'Database\\Factories\\ActivityLogFactory' => __DIR__ . '/../..' . '/database/factories/ActivityLogFactory.php',
-        'Database\\Factories\\BrandFactory' => __DIR__ . '/../..' . '/database/factories/BrandFactory.php',
-        'Database\\Factories\\CascoFactory' => __DIR__ . '/../..' . '/database/factories/CascoFactory.php',
-        'Database\\Factories\\CategoryFactory' => __DIR__ . '/../..' . '/database/factories/CategoryFactory.php',
-        'Database\\Factories\\FeatureFactory' => __DIR__ . '/../..' . '/database/factories/FeatureFactory.php',
-        'Database\\Factories\\FeatureValueFactory' => __DIR__ . '/../..' . '/database/factories/FeatureValueFactory.php',
-        'Database\\Factories\\InquiryFactory' => __DIR__ . '/../..' . '/database/factories/InquiryFactory.php',
-        'Database\\Factories\\MotoFactory' => __DIR__ . '/../..' . '/database/factories/MotoFactory.php',
-        'Database\\Factories\\PriceHistoryFactory' => __DIR__ . '/../..' . '/database/factories/PriceHistoryFactory.php',
-        'Database\\Factories\\ProductFactory' => __DIR__ . '/../..' . '/database/factories/ProductFactory.php',
-        'Database\\Factories\\ProductImageFactory' => __DIR__ . '/../..' . '/database/factories/ProductImageFactory.php',
-        'Database\\Factories\\QuoteFactory' => __DIR__ . '/../..' . '/database/factories/QuoteFactory.php',
-        'Database\\Factories\\QuoteItemFactory' => __DIR__ . '/../..' . '/database/factories/QuoteItemFactory.php',
-        'Database\\Factories\\RepuestoCodeFactory' => __DIR__ . '/../..' . '/database/factories/RepuestoCodeFactory.php',
-        'Database\\Factories\\RepuestoCompatibilityFactory' => __DIR__ . '/../..' . '/database/factories/RepuestoCompatibilityFactory.php',
-        'Database\\Factories\\RepuestoFactory' => __DIR__ . '/../..' . '/database/factories/RepuestoFactory.php',
-        'Database\\Factories\\SearchLogFactory' => __DIR__ . '/../..' . '/database/factories/SearchLogFactory.php',
-        'Database\\Factories\\ServiceFactory' => __DIR__ . '/../..' . '/database/factories/ServiceFactory.php',
-        'Database\\Factories\\SettingFactory' => __DIR__ . '/../..' . '/database/factories/SettingFactory.php',
-        'Database\\Factories\\TagFactory' => __DIR__ . '/../..' . '/database/factories/TagFactory.php',
-        'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\CatalogSeeder' => __DIR__ . '/../..' . '/database/seeders/CatalogSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\MotosComunesSeeder' => __DIR__ . '/../..' . '/database/seeders/MotosComunesSeeder.php',
@@ -5355,9 +5333,9 @@ class ComposerStaticInit3492741706fa63068ec0b91d799e9561
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3492741706fa63068ec0b91d799e9561::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3492741706fa63068ec0b91d799e9561::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit3492741706fa63068ec0b91d799e9561::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit76e94e85bb6860948fe793bc8e9feec2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit76e94e85bb6860948fe793bc8e9feec2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit76e94e85bb6860948fe793bc8e9feec2::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -55,7 +55,6 @@ class Pdf
     public float $marginTop    = 15.0;
     public float $marginBottom = 18.0;
 
-    private float $x = 15.0;
     private float $y = 15.0;
 
     /** @var array<int,string> Contenido de cada página */
@@ -68,7 +67,6 @@ class Pdf
     private array $textColor = [0, 0, 0];
     private array $fillColor = [1, 1, 1];
     private array $drawColor = [0, 0, 0];
-    private float $lineWidth = 0.2;
 
     /** @var array<string,array{data:string,w:int,h:int,index:int}> */
     private array $images = [];
@@ -141,11 +139,6 @@ class Pdf
         $this->y = $y;
     }
 
-    public function setX(float $x): void
-    {
-        $this->x = $x;
-    }
-
     public function moveY(float $delta): void
     {
         $this->y += $delta;
@@ -169,7 +162,6 @@ class Pdf
     {
         $this->pages[] = '';
         $this->current = count($this->pages) - 1;
-        $this->x = $this->marginLeft;
         $this->y = $this->marginTop;
 
         // Se reaplican los estados gráficos en la página nueva
@@ -229,12 +221,6 @@ class Pdf
     {
         $this->drawColor = $this->normalizeColor($color);
         $this->applyDrawColor();
-    }
-
-    public function setLineWidth(float $width): void
-    {
-        $this->lineWidth = $width;
-        $this->out(sprintf('%.2F w', $width * self::MM_TO_PT));
     }
 
     /** @return array{0:float,1:float,2:float} */
@@ -378,30 +364,6 @@ class Pdf
         $this->text($textX, $textY, $text);
     }
 
-    /**
-     * Texto multilínea con corte automático de palabras.
-     *
-     * @return float alto consumido en mm
-     */
-    public function multiCell(float $x, float $y, float $w, string $text, float $lineHeight = 4.6, string $align = 'L'): float
-    {
-        $lines  = $this->wrap($text, $w);
-        $cursor = $y;
-
-        foreach ($lines as $line) {
-            $lineWidth = $this->textWidth($line);
-            $lineX = match ($align) {
-                'C' => $x + ($w - $lineWidth) / 2,
-                'R' => $x + $w - $lineWidth,
-                default => $x,
-            };
-            $this->text($lineX, $cursor, $line);
-            $cursor += $lineHeight;
-        }
-
-        return $cursor - $y;
-    }
-
     /** @return array<int,string> */
     public function wrap(string $text, float $maxWidth): array
     {
@@ -538,16 +500,6 @@ class Pdf
         ));
 
         return true;
-    }
-
-    /** Alto que tendría la imagen respetando la proporción. */
-    public function imageHeight(string $file, float $w): float
-    {
-        $info = @getimagesize($file);
-        if ($info === false || $info[0] === 0) {
-            return 0.0;
-        }
-        return $w * ($info[1] / $info[0]);
     }
 
     // ----------------------------------------------------------------
