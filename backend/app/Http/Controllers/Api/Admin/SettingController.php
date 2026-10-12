@@ -23,9 +23,10 @@ class SettingController extends Controller
             'business_hours' => ['label' => 'Horarios', 'type' => 'text', 'help' => 'Ej.: Lunes a viernes 9 a 19 h · Sábados 9 a 13 h'],
         ]],
         ['key' => 'marca', 'label' => 'Marca (logo con texto)', 'icon' => 'badge-tm', 'settings' => [
+            'logo_mode' => ['label' => 'Qué mostrar como logo', 'type' => 'select', 'options' => ['' => 'Automático (texto si hay nombre cargado)', 'texto' => 'Ícono + nombre', 'imagen' => 'Logo en imagen (Imágenes del sitio)']],
             'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo, junto al ícono. Ej.: RODADO. Vacío = RODADO.'],
             'brand_sub' => ['label' => 'Texto secundario', 'type' => 'text', 'help' => 'Texto chico al lado del nombre. Ej.: MOTOS. Vacío = MOTOS.'],
-            'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = recuadro rojo con la moto. Si cargás un "Logo del sitio" en Imágenes, ese logo reemplaza a todo esto.'],
+            'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = recuadro rojo con la moto.'],
         ]],
         ['key' => 'contacto', 'label' => 'Contacto', 'icon' => 'telephone', 'settings' => [
             'contact_address' => ['label' => 'Dirección del showroom', 'type' => 'text', 'help' => 'Se usa también para el mapa del inicio.'],

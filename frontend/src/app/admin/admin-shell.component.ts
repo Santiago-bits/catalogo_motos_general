@@ -67,7 +67,7 @@ const NAV: NavSection[] = [
       <aside class="side" [class.is-open]="menuOpen()">
         <div class="side__head">
           <a routerLink="/admin" class="brand">
-            @if (site.settings()['site_logo']; as logo) {
+            @if (site.logoImage(); as logo) {
               <span class="brand__text">
                 <img class="brand__logo" [src]="logo" alt="Panel" />
                 <span class="brand__sub">Panel</span>

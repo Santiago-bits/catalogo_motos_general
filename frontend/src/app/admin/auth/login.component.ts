@@ -34,7 +34,7 @@ function loadGoogleScript(): Promise<any> {
     <div class="login">
       <section class="login__hero">
         <a routerLink="/" class="brand">
-          @if (site.settings()['site_logo']; as logo) {
+          @if (site.logoImage(); as logo) {
             <img class="brand__logo" [src]="logo" alt="Inicio" />
           } @else {
           @if (site.brandIcon(); as icon) {

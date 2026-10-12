@@ -16,6 +16,17 @@ export class SiteService {
   brandName = computed(() => this.settings()['brand_name']?.trim() || 'RODADO');
   brandSub = computed(() => this.settings()['brand_sub']?.trim() || 'MOTOS');
   brandIcon = computed(() => this.settings()['brand_icon'] || '');
+  /**
+   * Logo en imagen a mostrar, o '' para usar ícono + nombre.
+   * "Qué mostrar" decide; en automático gana el texto si hay un nombre cargado.
+   */
+  logoImage = computed(() => {
+    const s = this.settings();
+    const logo = s['site_logo'] || '';
+    if (s['logo_mode'] === 'imagen') return logo;
+    if (s['logo_mode'] === 'texto') return '';
+    return s['brand_name']?.trim() ? '' : logo;
+  });
   whatsappUrl = computed(() => {
     const number = (this.settings()['contact_whatsapp'] || '').replace(/\D/g, '');
     return number ? `https://wa.me/${number}` : '';

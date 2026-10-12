@@ -10,7 +10,7 @@ import { SiteService } from '../../core/services/site.service';
     <footer class="footer">
       <div class="footer__grid r-container">
         <div class="footer__col">
-          @if (site.settings()['site_logo']; as logo) {
+          @if (site.logoImage(); as logo) {
             <img class="footer__logo" [src]="logo" [alt]="site.settings()['site_name'] || 'Logo'" />
           } @else {
             <span class="footer__brand">
