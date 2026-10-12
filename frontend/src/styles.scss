@@ -1,0 +1,194 @@
+/* ==========================================================================
+   RODADO Motos — sistema de diseño
+   Las clases del sitio público llevan prefijo "r-" para no chocar con el panel.
+   ========================================================================== */
+
+:root {
+  --r-red: #C8102E;
+  --r-red-dark: #9E0C24;
+  --r-red-deep: #A50D26;
+  --r-red-soft: #FF5A6E;
+  --r-ink: #15161A;
+  --r-ink-deep: #0D0E11;
+  --r-ink-2: #23252B;
+  --r-line-dark: #2A2C33;
+  --r-paper: #F3F2EF;
+  --r-white: #FFFFFF;
+  --r-line: #E1E0DC;
+  --r-photo: #E9E8E4;
+  --r-input: #C9CBD1;
+  --r-muted: #6B6E77;
+  --r-muted-2: #5A5D66;
+  --r-text-2: #3E4148;
+  --r-label: #4A4D55;
+  --r-grey: #9DA0A8;
+  --r-whatsapp: #25603D;
+  --r-display: 'Barlow Condensed', sans-serif;
+  --r-body: 'Barlow', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Las anclas no quedan tapadas por el header fijo */
+[id] { scroll-margin-top: 96px; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--r-body);
+  background: var(--r-paper);
+  color: var(--r-ink);
+}
+
+a { color: var(--r-red); }
+a:hover { color: var(--r-red-dark); }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Layout ---------- */
+.r-container { max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+.r-section { padding-top: 96px; padding-bottom: 96px; }
+
+/* ---------- Tipografía ---------- */
+.r-eyebrow {
+  font-family: var(--r-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--r-red);
+}
+.r-h1 {
+  margin: 0;
+  font-family: var(--r-display);
+  font-weight: 800;
+  font-size: 88px;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.r-h2 {
+  margin: 0;
+  font-family: var(--r-display);
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.r-h3 {
+  margin: 0;
+  font-family: var(--r-display);
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+.r-lead { margin: 0; font-size: 19px; line-height: 1.6; color: var(--r-text-2); }
+
+/* ---------- Botones ---------- */
+.r-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 14px 28px;
+  border: 2px solid transparent;
+  font-family: var(--r-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  background: transparent;
+  color: var(--r-ink);
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.r-btn:disabled { opacity: .6; cursor: default; }
+.r-btn--sm { font-size: 17px; padding: 11px 16px; }
+.r-btn--red { background: var(--r-red); border-color: var(--r-red); color: var(--r-white); }
+.r-btn--red:hover { background: var(--r-red-dark); border-color: var(--r-red-dark); color: var(--r-white); }
+.r-btn--dark { background: var(--r-ink); border-color: var(--r-ink); color: var(--r-white); }
+.r-btn--dark:hover { background: #000; color: var(--r-white); }
+.r-btn--white { background: var(--r-white); border-color: var(--r-white); color: var(--r-ink); }
+.r-btn--white:hover { background: var(--r-paper); color: var(--r-ink); }
+.r-btn--outline { border-color: var(--r-ink); color: var(--r-ink); }
+.r-btn--outline:hover { background: var(--r-ink); color: var(--r-white); }
+.r-btn--outline-light { border-color: var(--r-white); color: var(--r-white); }
+.r-btn--outline-light:hover { background: var(--r-white); color: var(--r-ink); }
+.r-btn--whatsapp { background: var(--r-whatsapp); border-color: var(--r-whatsapp); color: var(--r-white); }
+.r-btn--whatsapp:hover { background: #1c4a2f; color: var(--r-white); }
+
+/* ---------- Formularios ---------- */
+.r-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--r-label);
+}
+.r-input {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--r-ink);
+  padding: 12px;
+  border: 1px solid var(--r-input);
+  border-radius: 0;
+  background: var(--r-white);
+  min-height: 48px;
+  width: 100%;
+}
+.r-input:focus { outline: 2px solid var(--r-red); outline-offset: -1px; border-color: var(--r-red); }
+textarea.r-input { resize: vertical; min-height: 110px; }
+
+.r-panel { background: var(--r-white); border: 1px solid var(--r-line); }
+.r-success { margin: 0; padding: 16px 18px; background: #E8F2EC; color: var(--r-whatsapp); font-weight: 600; border-left: 4px solid var(--r-whatsapp); }
+
+/* ---------- Tabs (filtro por condición) ---------- */
+.r-tabs { display: flex; flex-wrap: wrap; border: 2px solid var(--r-ink); }
+.r-tab {
+  font-family: var(--r-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 0;
+  min-height: 46px;
+  padding: 0 24px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--r-ink);
+}
+.r-tab[aria-selected="true"] { background: var(--r-ink); color: var(--r-white); }
+
+/* ---------- Encabezado de páginas internas ---------- */
+.r-page-head { background: var(--r-ink); color: var(--r-white); }
+.r-page-head__inner { padding-top: 64px; padding-bottom: 64px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.r-page-head .r-eyebrow { color: var(--r-red-soft); }
+.r-page-head__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 72px; line-height: 0.95; text-transform: uppercase; }
+.r-page-head__title span { color: var(--r-red); }
+.r-page-head__text { margin: 0; font-size: 19px; line-height: 1.55; color: #C9CBD1; max-width: 620px; }
+.r-crumbs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; font-size: 14px; color: var(--r-grey); }
+.r-crumbs a { color: #C9CBD1; text-decoration: none; }
+.r-crumbs a:hover { color: var(--r-white); }
+
+.r-status { padding: 48px 0; text-align: center; color: var(--r-muted); font-size: 17px; }
+.r-grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+
+@media (max-width: 640px) {
+  .r-h1 { font-size: 56px; }
+  .r-h2 { font-size: 40px; }
+  .r-page-head__title { font-size: 48px; }
+  .r-section { padding-top: 64px; padding-bottom: 64px; }
+}

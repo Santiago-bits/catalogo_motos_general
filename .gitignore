@@ -1,0 +1,38 @@
+# Backend (Laravel)
+/backend/.env
+/backend/vendor/
+/backend/node_modules/
+/backend/storage/*.key
+/backend/storage/framework/cache/*
+/backend/storage/framework/sessions/*
+/backend/storage/framework/testing/*
+/backend/storage/framework/views/*
+/backend/storage/logs/*
+/backend/bootstrap/cache/*.php
+/backend/public/storage
+/backend/public/hot
+!/backend/storage/framework/cache/.gitignore
+!/backend/storage/framework/sessions/.gitignore
+!/backend/storage/framework/testing/.gitignore
+!/backend/storage/framework/views/.gitignore
+!/backend/storage/logs/.gitignore
+
+# Frontend (Angular)
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.angular/
+
+# Volcados de base y paquetes de deploy
+*.sql
+*.zip
+
+# Paquete generado por deploy/build-hostinger.ps1
+/deploy/out/
+
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
