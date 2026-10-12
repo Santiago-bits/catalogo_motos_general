@@ -73,11 +73,15 @@ const NAV: NavSection[] = [
                 <span class="brand__sub">Panel</span>
               </span>
             } @else {
+            @if (site.brandIcon(); as icon) {
+              <img class="brand__icon" [src]="icon" alt="" />
+            } @else {
             <span class="brand__mark">
               <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="16.5" r="3.5"></circle><circle cx="18.5" cy="16.5" r="3.5"></circle><path d="M5.5 16.5 10 9h5l3.5 7.5"></path><path d="M14 6h3l1.5 3"></path></svg>
             </span>
+            }
             <span class="brand__text">
-              <span class="brand__name">RODADO<span class="dot">.</span></span>
+              <span class="brand__name">{{ site.brandName() }}<span class="dot">.</span></span>
               <span class="brand__sub">Panel</span>
             </span>
             }
@@ -186,7 +190,8 @@ const NAV: NavSection[] = [
     .brand__mark { width: 38px; height: 38px; background: #C8102E; display: flex; align-items: center; justify-content: center; transform: skewX(-10deg); }
     .brand__text { display: flex; flex-direction: column; line-height: 1; }
     .brand__logo { display: block; height: 40px; width: auto; max-width: 180px; object-fit: contain; object-position: left center; margin-bottom: 4px; }
-    .brand__name { font-family: var(--r-display); font-weight: 800; font-size: 26px; letter-spacing: 0.04em; }
+    .brand__icon { display: block; width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
+    .brand__name { font-family: var(--r-display); font-weight: 800; font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; }
     .dot { color: #C8102E; }
     .brand__sub { font-family: var(--r-display); font-weight: 600; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #FF5A6E; margin-top: 3px; }
 

@@ -17,10 +17,14 @@ import { SiteService } from '../../core/services/site.service';
           @if (site.settings()['site_logo']; as logo) {
             <img class="brand__logo" [src]="logo" [alt]="site.settings()['site_name'] || 'Inicio'" />
           } @else {
+          @if (site.brandIcon(); as icon) {
+            <img class="brand__icon" [src]="icon" alt="" />
+          } @else {
           <span class="brand__mark">
             <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="16.5" r="3.5"></circle><circle cx="18.5" cy="16.5" r="3.5"></circle><path d="M5.5 16.5 10 9h5l3.5 7.5"></path><path d="M14 6h3l1.5 3"></path></svg>
           </span>
-          <span class="brand__name">RODADO<span class="brand__dot">.</span> <span class="brand__sub">MOTOS</span></span>
+          }
+          <span class="brand__name">{{ site.brandName() }}<span class="brand__dot">.</span> <span class="brand__sub">{{ site.brandSub() }}</span></span>
           }
         </a>
 
@@ -74,7 +78,8 @@ import { SiteService } from '../../core/services/site.service';
     .brand:hover { color: #FFFFFF; }
     .brand__logo { display: block; height: 48px; width: auto; max-width: 220px; object-fit: contain; }
     .brand__mark { width: 44px; height: 44px; background: var(--r-red); display: flex; align-items: center; justify-content: center; transform: skewX(-10deg); }
-    .brand__name { font-family: var(--r-display); font-weight: 800; font-size: 30px; letter-spacing: 0.04em; line-height: 1; }
+    .brand__icon { display: block; width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; }
+    .brand__name { font-family: var(--r-display); font-weight: 800; font-size: 30px; letter-spacing: 0.04em; line-height: 1; text-transform: uppercase; }
     .brand__dot { color: var(--r-red); }
     .brand__sub { font-weight: 500; color: var(--r-grey); font-size: 22px; letter-spacing: 0.12em; }
 

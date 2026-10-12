@@ -13,7 +13,10 @@ import { SiteService } from '../../core/services/site.service';
           @if (site.settings()['site_logo']; as logo) {
             <img class="footer__logo" [src]="logo" [alt]="site.settings()['site_name'] || 'Logo'" />
           } @else {
-            <span class="footer__brand">RODADO<span class="dot">.</span> MOTOS</span>
+            <span class="footer__brand">
+              @if (site.brandIcon(); as icon) { <img class="footer__icon" [src]="icon" alt="" /> }
+              {{ site.brandName() }}<span class="dot">.</span> {{ site.brandSub() }}
+            </span>
           }
           <span class="footer__about">{{ site.settings()['footer_about'] || 'Concesionario de motos 0 km y usadas. Venta, financiación, service y accesorios.' }}</span>
         </div>
@@ -47,7 +50,7 @@ import { SiteService } from '../../core/services/site.service';
         </div>
       </div>
       <div class="footer__bottom r-container">
-        <span>&copy; {{ year }} RODADO Motos{{ site.settings()['legal_name'] ? ' · ' + site.settings()['legal_name'] : '' }}{{ site.settings()['legal_cuit'] ? ' · ' + site.settings()['legal_cuit'] : '' }}</span>
+        <span>&copy; {{ year }} {{ site.settings()['site_name'] || site.brandName() + ' ' + site.brandSub() }}{{ site.settings()['legal_name'] ? ' · ' + site.settings()['legal_name'] : '' }}{{ site.settings()['legal_cuit'] ? ' · ' + site.settings()['legal_cuit'] : '' }}</span>
         <span>Precios y disponibilidad sujetos a cambios sin previo aviso.</span>
       </div>
     </footer>
@@ -57,7 +60,8 @@ import { SiteService } from '../../core/services/site.service';
     .footer__grid { padding-top: 64px; padding-bottom: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 36px; }
     .footer__col { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
     .footer__logo { display: block; height: 44px; width: auto; max-width: 200px; object-fit: contain; object-position: center; }
-    .footer__brand { font-family: var(--r-display); font-weight: 800; font-size: 28px; letter-spacing: 0.04em; color: #FFFFFF; }
+    .footer__brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--r-display); font-weight: 800; font-size: 28px; letter-spacing: 0.04em; color: #FFFFFF; text-transform: uppercase; }
+    .footer__icon { width: 36px; height: 36px; object-fit: contain; }
     .dot { color: var(--r-red); }
     .footer__about { line-height: 1.55; margin-top: 4px; white-space: pre-line; }
     .socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 2px; }

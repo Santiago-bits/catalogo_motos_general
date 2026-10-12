@@ -12,6 +12,10 @@ export class SiteService {
   phone = computed(() => this.settings()['contact_phone'] || '');
   email = computed(() => this.settings()['contact_email'] || '');
   address = computed(() => this.settings()['contact_address'] || '');
+  /** Logo con texto (Configuración → Marca); se usa cuando no hay "Logo del sitio" en imagen. */
+  brandName = computed(() => this.settings()['brand_name']?.trim() || 'RODADO');
+  brandSub = computed(() => this.settings()['brand_sub']?.trim() || 'MOTOS');
+  brandIcon = computed(() => this.settings()['brand_icon'] || '');
   whatsappUrl = computed(() => {
     const number = (this.settings()['contact_whatsapp'] || '').replace(/\D/g, '');
     return number ? `https://wa.me/${number}` : '';
