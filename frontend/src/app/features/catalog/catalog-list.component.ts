@@ -50,7 +50,14 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     </section>
 
     <div class="filters r-container">
-      <form class="filters__form" aria-label="Filtrar catálogo" (ngSubmit)="apply()">
+      <!-- En teléfono el formulario va plegado detrás de este botón. -->
+      <button type="button" class="filters__toggle" [attr.aria-expanded]="filtersOpen()" (click)="filtersOpen.set(!filtersOpen())">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        Filtros y orden
+        @if (activeCount()) { <span class="filters__count">{{ activeCount() }}</span> }
+        <svg class="filters__chev" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <form class="filters__form" [class.is-open]="filtersOpen()" aria-label="Filtrar catálogo" (ngSubmit)="apply()">
         @if (type === 'moto') {
           <label class="r-field">Condición
             <select class="r-input" name="condicion" [(ngModel)]="filters.condicion">
@@ -80,7 +87,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
             @for (r of priceRanges; track r) { <option [value]="r">$ {{ formatNumber(r) }}</option> }
           </select>
         </label>
-        <label class="r-field">Ordenar
+        <label class="r-field filters__sort">Ordenar
           <select class="r-input" name="orden" [(ngModel)]="filters.orden">
             <option value="recientes">Más recientes</option>
             <option value="precio_asc">Precio: menor a mayor</option>
@@ -136,6 +143,19 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .filters { margin-top: -36px; position: relative; }
     .filters__form { background: #FFFFFF; box-shadow: 0 18px 40px rgba(13,14,17,0.18); padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; align-items: end; }
     .filters__btn { min-height: 48px; padding: 0 24px; }
+    .filters__toggle { display: none; }
+    @media (max-width: 640px) {
+      .filters { margin-top: -28px; }
+      .filters__toggle { width: 100%; min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 10px; background: #FFFFFF; border: 0; border-top: 4px solid var(--r-red); box-shadow: 0 14px 30px rgba(13,14,17,0.16); font-family: var(--r-display); font-weight: 700; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--r-ink); cursor: pointer; }
+      .filters__count { min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--r-red); color: #FFFFFF; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; letter-spacing: 0; }
+      .filters__chev { transition: transform .2s; }
+      .filters__toggle[aria-expanded="true"] .filters__chev { transform: rotate(180deg); }
+      .filters__form { display: none; grid-template-columns: 1fr 1fr; gap: 12px; padding: 18px 16px 20px; box-shadow: 0 14px 30px rgba(13,14,17,0.16); }
+      .filters__form.is-open { display: grid; }
+      .filters__form .r-field { font-size: 12px; min-width: 0; }
+      .filters__form .r-input { min-height: 44px; padding: 8px 10px; font-size: 15px; }
+      .filters__sort, .filters__btn { grid-column: 1 / -1; }
+    }
     .results { padding-top: 56px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 32px; }
     .results__head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
     .results__count { margin: 0; font-size: 17px; color: var(--r-muted-2); }
@@ -164,6 +184,7 @@ export class CatalogListComponent implements OnInit {
   page = signal(1);
   lastPage = signal(1);
   total = signal(0);
+  filtersOpen = signal(false);
 
   filters: { condicion: '' | 'nueva' | 'usada'; categoria: string; marca: string; precio_max: string; orden: NonNullable<CatalogFilters['orden']> } = {
     condicion: '',
@@ -211,7 +232,14 @@ export class CatalogListComponent implements OnInit {
     return new Intl.NumberFormat('es-AR').format(n);
   }
 
+  /** Filtros cargados (sin contar el orden), para el contador del botón en teléfono. */
+  activeCount(): number {
+    const f = this.filters;
+    return [f.condicion, f.categoria, f.marca, f.precio_max].filter(Boolean).length;
+  }
+
   apply(): void {
+    this.filtersOpen.set(false);
     this.navigate(1);
   }
 
