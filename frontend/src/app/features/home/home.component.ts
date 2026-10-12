@@ -40,7 +40,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
           <p class="hero__text">{{ site.settings()['hero_text'] || 'Motos nuevas y usadas seleccionadas, financiación a tu medida y un taller que te acompaña después de la compra.' }}</p>
           <div class="hero__actions">
             <a routerLink="/motos" class="r-btn r-btn--red hero__btn">Ver catálogo</a>
-            <a routerLink="/" fragment="usada" class="r-btn r-btn--outline-light">Cotizá tu usada</a>
+            <a routerLink="/" fragment="usada" class="r-btn r-btn--outline-light hero__btn">Cotizá tu usada</a>
           </div>
         </div>
         <div class="hero__media">
@@ -433,7 +433,15 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 
     @media (max-width: 640px) {
       .finance__title { font-size: clamp(28px, 9vw, 44px); }
-      .hero__inner { padding-top: 48px; }
+      /* Hero en teléfono: todo centrado y botones parejos a lo ancho. */
+      .hero__inner { padding-top: 32px; gap: 32px; }
+      .hero__copy { align-items: center; text-align: center; gap: 18px; }
+      .hero__eyebrow { font-size: 14px; letter-spacing: 0.14em; }
+      .hero__copy .r-h1 { font-size: clamp(40px, 12vw, 56px); }
+      .hero__text { font-size: 17px; }
+      .hero__actions { flex-direction: column; align-self: stretch; gap: 10px; }
+      .hero__btn { width: 100%; justify-content: center; text-align: center; }
+      .hero__slash { inset: 10% -30% 10% 20%; }
     }
   `],
 })
