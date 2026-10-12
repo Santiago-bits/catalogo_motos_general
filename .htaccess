@@ -1,0 +1,46 @@
+DirectoryIndex index.html index.php
+Options -Indexes -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Siempre por HTTPS.
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # El backend y los archivos ocultos (.git, .env, ...) no se sirven nunca.
+    RewriteRule ^laravel(/|$) - [F,L]
+    RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+    # Pasar el token del panel a PHP.
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # La API la atiende Laravel.
+    RewriteRule ^(api|up)(/.*)?$ index.php [L]
+
+    # Archivos que existen (assets, imágenes subidas en /storage) se sirven tal cual.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Una imagen subida que no existe da 404 (no la página del sitio).
+    RewriteRule ^storage/ - [R=404,L]
+
+    # Todo lo demás es una ruta del sitio Angular (/motos, /admin, ...).
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# Los archivos con hash se cachean un año; index.html nunca, para que un deploy se vea al toque.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|woff2?)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "^index\.html$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
