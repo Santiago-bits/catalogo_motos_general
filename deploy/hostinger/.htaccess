@@ -8,6 +8,10 @@ Options -Indexes -MultiViews
     RewriteCond %{HTTPS} off
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+    # El backend y los archivos ocultos (.git, .env, ...) no se sirven nunca.
+    RewriteRule ^laravel(/|$) - [F,L]
+    RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
     # Pasar el token del panel a PHP.
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

@@ -1,0 +1,3 @@
+# Rama "produccion": lo que vive sólo en el servidor y un git pull no debe tocar.
+/laravel/.env
+/storage/

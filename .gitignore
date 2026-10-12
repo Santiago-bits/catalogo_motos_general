@@ -26,8 +26,9 @@
 *.sql
 *.zip
 
-# Paquete generado por deploy/build-hostinger.ps1
+# Generados por deploy/preparar-servidor.ps1 y deploy/armar-produccion.sh
 /deploy/out/
+/build/
 
 
 # Sistema operativo / editores

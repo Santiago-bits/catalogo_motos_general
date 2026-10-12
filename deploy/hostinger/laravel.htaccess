@@ -1,0 +1,2 @@
+# Se copia como public_html/laravel/.htaccess: nada del backend se sirve por la web.
+Require all denied

@@ -42,55 +42,55 @@ npm start
 
 El sitio queda en `http://localhost:4200` y el panel en `http://localhost:4200/admin`.
 
-## Publicar en Hostinger
+## Publicar en Hostinger (se actualiza solo con git)
 
-En Hostinger el sitio y la API quedan en el mismo dominio:
+Cada push a `main` dispara la GitHub Action [`deploy.yml`](.github/workflows/deploy.yml): compila
+el sitio Angular, instala el backend sin dependencias de desarrollo y publica el resultado en la
+rama **`produccion`**. Hostinger clona esa rama dentro de `public_html` y se actualiza solo.
 
 ```
-domains/tu-dominio.com/
-├── laravel/       backend (fuera del alcance de la web)
-└── public_html/   sitio Angular + index.php + .htaccess + imágenes (storage/)
+public_html/                 (rama produccion)
+├── index.html, *.js, *.css  sitio Angular
+├── index.php, .htaccess     /api va a Laravel, el resto al sitio
+├── laravel/                 backend (bloqueado desde la web)
+│   └── .env                 sólo en el servidor, git no lo toca
+└── storage/                 imágenes subidas desde el panel, git no lo toca
 ```
 
-`public_html/.htaccess` manda `/api/*` a Laravel y el resto de las rutas al sitio Angular.
-Las imágenes que se suben desde el panel se guardan directo en `public_html/storage`
-(variable `PUBLIC_PATH`), así que no hace falta `storage:link`.
+### Primera vez
 
-### 1. Armar el paquete (en la PC)
+**1. En la PC** — generar el `.env`, la base y las imágenes:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File deploy\build-hostinger.ps1 -Url https://tu-dominio.com
+powershell -ExecutionPolicy Bypass -File deploy\preparar-servidor.ps1 -DbName u404079745_motos -DbUser u404079745_motos
 ```
 
-Deja en `deploy/out/`:
+Deja en `deploy/out/`: `.env`, `database.sql` y `storage.zip`.
 
-| Archivo | Qué es |
-|---|---|
-| `hostinger.zip` | carpetas `laravel/` y `public_html/` listas para subir |
-| `database.sql` | copia de la base local, con las URLs de imágenes ya apuntando al dominio |
+**2. En hPanel:**
 
-Opciones: `-SkipDatabase` (no exporta la base) y `-SkipFrontend` (usa el último build de Angular).
-
-### 2. En hPanel
-
-1. **PHP:** en *Avanzado → Configuración de PHP* elegir PHP **8.3 o superior**.
-   En *Opciones de PHP* subir `upload_max_filesize` y `post_max_size` (ej. 64M) para manuales y videos.
-2. **Base de datos:** en *Bases de datos → MySQL* crear base y usuario, y en phpMyAdmin importar `database.sql`.
-3. **Archivos:** en el *Administrador de archivos* abrir `domains/tu-dominio.com/`, borrar el contenido
-   de `public_html` (el `default.php` de Hostinger), subir `hostinger.zip` y descomprimirlo ahí.
-4. **Configuración:** editar `laravel/.env` y completar `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD`.
-   `APP_URL` y `APP_KEY` ya vienen cargados por el script.
-5. **SSL:** activar el certificado en *Seguridad → SSL* (el `.htaccess` fuerza HTTPS).
+1. **PHP:** *Avanzado → Configuración de PHP* → PHP **8.4**.
+   En *Opciones de PHP* subir `upload_max_filesize` y `post_max_size` (ej. 64M).
+2. **Base de datos:** en phpMyAdmin de la base creada → *Importar* → `database.sql`.
+3. **Vaciar `public_html`** desde el *Administrador de archivos* (Git necesita la carpeta vacía).
+4. **Git:** *Avanzado → Git* → repositorio `https://github.com/Santiago-bits/catalogo_motos_general.git`,
+   rama **`produccion`**, directorio vacío (= `public_html`) → *Crear* y después *Implementar*.
+5. **Implementación automática:** en la misma pantalla activarla y copiar la URL del webhook.
+   En GitHub: *Settings → Webhooks → Add webhook* → pegar la URL → *Add webhook*.
+6. **Archivos del servidor** (Administrador de archivos):
+   - subir `.env` a `public_html/laravel/` y completar `DB_PASSWORD`;
+   - subir `storage.zip` a `public_html/` y descomprimirlo (queda `public_html/storage/`).
+7. **SSL:** *Seguridad → SSL* (el `.htaccess` fuerza HTTPS).
 
 Entrar a `https://tu-dominio.com/admin` y cambiar la contraseña del administrador desde el perfil.
 
-### Actualizar el sitio
+### Después
 
-Volver a correr el script con `-SkipDatabase` y subir solo lo que cambió:
+`git push` a `main` y listo: en 2-3 minutos la Action actualiza `produccion` y Hostinger la baja.
+El avance se ve en la pestaña *Actions* del repo.
 
-- Cambios en el sitio/panel → reemplazar los archivos de `public_html` **sin borrar `public_html/storage`**.
-- Cambios en el backend → reemplazar `laravel/` **sin pisar `laravel/.env` ni `laravel/storage`**.
-- Si hay migraciones nuevas, por SSH: `cd domains/tu-dominio.com/laravel && php artisan migrate --force`.
+Si un cambio trae migraciones nuevas, correrlas una vez por SSH:
+`cd public_html/laravel && php artisan migrate --force`.
 
 ### Login con Google
 
