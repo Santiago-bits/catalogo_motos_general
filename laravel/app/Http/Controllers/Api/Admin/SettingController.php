@@ -26,7 +26,7 @@ class SettingController extends Controller
             'logo_mode' => ['label' => 'Qué mostrar como logo', 'type' => 'select', 'options' => ['' => 'Automático (texto si hay nombre cargado)', 'texto' => 'Ícono + nombre', 'imagen' => 'Logo en imagen (Imágenes del sitio)']],
             'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo, junto al ícono. Ej.: RODADO. Vacío = RODADO.'],
             'brand_sub' => ['label' => 'Texto secundario', 'type' => 'text', 'help' => 'Texto chico al lado del nombre. Ej.: MOTOS. Vacío = MOTOS.'],
-            'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = recuadro rojo con la moto.'],
+            'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = sólo el nombre, sin ícono.'],
         ]],
         ['key' => 'contacto', 'label' => 'Contacto', 'icon' => 'telephone', 'settings' => [
             'contact_address' => ['label' => 'Dirección del showroom', 'type' => 'text', 'help' => 'Se usa también para el mapa del inicio.'],
