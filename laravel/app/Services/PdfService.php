@@ -14,15 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class PdfService
 {
-    private const RED = '#C8102E';
+    private const RED = '#E2001A';
 
-    private const INK = '#15161A';
+    private const INK = '#0A0A0A';
 
-    private const DARK = '#2A2C33';
+    private const DARK = '#2A2A2D';
 
-    private const GRAY = '#6B6E77';
+    private const GRAY = '#6E6E73';
 
-    private const LIGHT = '#F3F2EF';
+    private const LIGHT = '#F4F4F4';
 
     public static function response(Pdf $pdf, string $filename, bool $download = true): Response
     {
@@ -330,7 +330,7 @@ class PdfService
         $pdf->setTextColor('#FFFFFF');
         $pdf->text(14, 14, mb_strtoupper((string) (Setting::get('brand_name') ?: 'RODADO')).'.');
         $pdf->setFont('', 8);
-        $pdf->setTextColor('#9DA0A8');
+        $pdf->setTextColor('#9E9EA3');
         $pdf->text(14, 19.5, mb_strtoupper((string) (Setting::get('brand_sub') ?: 'MOTOS')).' · CONCESIONARIO');
 
         $pdf->setFont('', 7);
