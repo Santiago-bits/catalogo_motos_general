@@ -470,9 +470,10 @@ export class HomeComponent implements OnInit {
   });
 
   mapUrl = computed<SafeResourceUrl | null>(() => {
-    const address = this.site.address();
-    if (!address) return null;
-    const url = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&z=15&output=embed`;
+    // Con "Ubicación en Google Maps" cargada se marca el punto exacto; si no, se busca la dirección.
+    const place = this.site.settings()['map_coords'] || this.site.address();
+    if (!place) return null;
+    const url = `https://maps.google.com/maps?q=${encodeURIComponent(place)}&z=16&output=embed`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   });
 
