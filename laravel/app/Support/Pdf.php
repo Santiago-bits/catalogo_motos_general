@@ -581,7 +581,7 @@ class Pdf
         // Información del documento
         $infoId = max(array_keys($objects)) + 1;
         $objects[$infoId] = sprintf(
-            '<< /Title (%s) /Author (%s) /Producer (RODADO Motos) /CreationDate (D:%s) >>',
+            '<< /Title (%s) /Author (%s) /Producer (Catalogo Motos) /CreationDate (D:%s) >>',
             $this->escape($this->title),
             $this->escape($this->author),
             date('YmdHis')

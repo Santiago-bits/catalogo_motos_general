@@ -16,12 +16,6 @@ class SettingController extends Controller
      * type: text | textarea | email | url | tel | select | bool | image
      */
     public const GROUPS = [
-        ['key' => 'empresa', 'label' => 'Empresa', 'icon' => 'building', 'settings' => [
-            'site_name' => ['label' => 'Nombre del sitio', 'type' => 'text'],
-            'legal_name' => ['label' => 'Razón social', 'type' => 'text', 'help' => 'Aparece al pie del sitio.'],
-            'legal_cuit' => ['label' => 'CUIT', 'type' => 'text'],
-            'business_hours' => ['label' => 'Horarios', 'type' => 'text', 'help' => 'Ej.: Lunes a viernes 9 a 19 h · Sábados 9 a 13 h'],
-        ]],
         ['key' => 'marca', 'label' => 'Marca (logo con texto)', 'icon' => 'badge-tm', 'settings' => [
             'logo_mode' => ['label' => 'Qué mostrar como logo', 'type' => 'select', 'options' => ['' => 'Automático (texto si hay nombre cargado)', 'texto' => 'Ícono + nombre', 'imagen' => 'Logo en imagen (Imágenes del sitio)']],
             'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo, junto al ícono. Ej.: RODADO. Vacío = RODADO.'],
@@ -31,8 +25,8 @@ class SettingController extends Controller
         ['key' => 'contacto', 'label' => 'Contacto', 'icon' => 'telephone', 'settings' => [
             'contact_address' => ['label' => 'Dirección del showroom', 'type' => 'text', 'help' => 'Se usa también para el mapa del inicio.'],
             'contact_phone' => ['label' => 'Teléfono', 'type' => 'tel'],
-            'contact_whatsapp' => ['label' => 'WhatsApp', 'type' => 'tel', 'help' => 'Con código de país, sin espacios. Ej.: 5491155555555'],
-            'contact_email' => ['label' => 'Email', 'type' => 'email'],
+            'contact_whatsapp' => ['label' => 'WhatsApp', 'type' => 'tel', 'help' => 'Con código de país, sin espacios. Ej.: 5491155555555. Todas las consultas de clientes llegan acá.'],
+            'business_hours' => ['label' => 'Horarios', 'type' => 'text', 'help' => 'Ej.: Lunes a viernes 9 a 19 h · Sábados 9 a 13 h'],
         ]],
         ['key' => 'textos', 'label' => 'Textos del sitio', 'icon' => 'fonts', 'settings' => [
             'hero_text' => ['label' => 'Texto de la portada', 'type' => 'textarea', 'help' => 'Debajo de "Tu próxima moto te está esperando" en el inicio. Vacío = texto por defecto.'],
