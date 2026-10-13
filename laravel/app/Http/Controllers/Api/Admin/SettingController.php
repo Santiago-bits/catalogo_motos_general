@@ -42,9 +42,6 @@ class SettingController extends Controller
             'currency_default' => ['label' => 'Moneda por defecto', 'type' => 'select', 'options' => ['ARS' => 'Pesos (ARS)', 'USD' => 'Dólares (USD)']],
             'financing_details' => ['label' => 'Detalle de planes y tasas', 'type' => 'textarea', 'help' => 'Se muestra en la franja de financiación del inicio.'],
         ]],
-        ['key' => 'acceso', 'label' => 'Acceso al panel', 'icon' => 'google', 'settings' => [
-            'google_client_id' => ['label' => 'Google · ID de cliente OAuth', 'type' => 'text', 'help' => 'Activa "Iniciar sesión con Google" en el login. Se crea en Google Cloud Console → APIs y servicios → Credenciales (tipo "Aplicación web", con el dominio del sitio como origen autorizado). Vacío = desactivado.'],
-        ]],
         ['key' => 'imagenes', 'label' => 'Imágenes del sitio', 'icon' => 'image', 'settings' => [
             'site_logo' => ['label' => 'Logo del sitio', 'type' => 'image', 'help' => 'Reemplaza a "RODADO. MOTOS" en el encabezado, el pie, el login y el panel. Ideal PNG o SVG con fondo transparente, en versión clara (va sobre fondo oscuro).'],
             'hero_image' => ['label' => 'Foto de portada', 'type' => 'image', 'help' => 'Horizontal, ideal 1600 × 1200 px.'],
