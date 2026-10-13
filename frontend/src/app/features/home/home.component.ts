@@ -303,7 +303,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .hero__text { margin: 0; font-size: 20px; line-height: 1.55; color: #CACACE; max-width: 520px; white-space: pre-line; }
     .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
     .hero__btn { padding: 16px 30px; }
-    .hero__media { flex: 1 1 520px; min-width: 0; position: relative; }
+    .hero__media { flex: 1.4 1 560px; min-width: 0; position: relative; }
     .hero__slash { position: absolute; inset: 8% -20% 8% 10%; background: var(--r-red); transform: skewX(-12deg); }
     .hero__photo { position: relative; aspect-ratio: 4 / 3; background: var(--r-ink-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #34363E; overflow: hidden; }
     /* Con imagen cargada el recuadro toma la forma de la foto, sin bandas vacías:
