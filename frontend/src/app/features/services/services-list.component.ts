@@ -45,8 +45,9 @@ import { CatalogService } from '../../core/services/catalog.service';
   `,
   styles: [`
     .services { display: flex; flex-direction: column; gap: 48px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-    .card { background: #FFFFFF; border: 1px solid var(--r-line); border-top: 3px solid var(--r-red); padding: 28px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; color: var(--r-ink); text-decoration: none; transition: transform .15s; }
+    /* Se adaptan a la cantidad: reparten el ancho, y una fila incompleta queda centrada. */
+    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+    .card { flex: 1 1 280px; max-width: 440px; background: #FFFFFF; border: 1px solid var(--r-line); border-top: 3px solid var(--r-red); padding: 28px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; color: var(--r-ink); text-decoration: none; transition: transform .15s; }
     .card:hover { color: var(--r-ink); transform: translateY(-2px); }
     .card__num { font-family: var(--r-display); font-weight: 800; font-size: 44px; line-height: 1; color: var(--r-red); }
     .card p { margin: 0; color: var(--r-muted-2); line-height: 1.5; flex-grow: 1; }
