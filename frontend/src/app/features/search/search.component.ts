@@ -22,7 +22,7 @@ import { ProductCardComponent } from '../../shared/product-card.component';
 
     <div class="r-container bar">
       <form class="bar__form" role="search" (ngSubmit)="submit()">
-        <label class="r-field bar__field">Modelo, marca o código
+        <label class="r-field bar__field">Modelo, marca o tipo
           <input class="r-input" type="search" name="q" [(ngModel)]="query" placeholder="Ej.: Twister, casco LS2, filtro de aceite" />
         </label>
         <button type="submit" class="r-btn r-btn--red bar__btn">Buscar</button>
