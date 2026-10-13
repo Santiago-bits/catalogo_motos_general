@@ -178,30 +178,30 @@ const NAV: NavSection[] = [
   styles: [`
     .shell { display: flex; min-height: 100vh; background: var(--a-bg); }
 
-    .side { width: 252px; flex-shrink: 0; background: #15161A; color: #C9CBD1; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 40; }
-    .side__head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid #2A2C33; }
-    .side__close { display: none; background: none; border: 0; color: #C9CBD1; font-size: 18px; cursor: pointer; }
+    .side { width: 252px; flex-shrink: 0; background: #0A0A0A; color: #CACACE; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 40; }
+    .side__head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid #2A2A2D; }
+    .side__close { display: none; background: none; border: 0; color: #CACACE; font-size: 18px; cursor: pointer; }
     .brand { display: flex; align-items: center; gap: 12px; color: #FFF; text-decoration: none; }
     .brand:hover { color: #FFF; }
-    .brand__mark { width: 38px; height: 38px; background: #C8102E; display: flex; align-items: center; justify-content: center; transform: skewX(-10deg); }
+    .brand__mark { width: 38px; height: 38px; background: #E2001A; display: flex; align-items: center; justify-content: center; transform: skewX(-10deg); }
     .brand__text { display: flex; flex-direction: column; line-height: 1; }
     .brand__logo { display: block; height: 40px; width: auto; max-width: 180px; object-fit: contain; object-position: left center; margin-bottom: 4px; }
     .brand__icon { display: block; width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
     .brand__name { font-family: var(--r-display); font-weight: 800; font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; }
-    .dot { color: #C8102E; }
-    .brand__sub { font-family: var(--r-display); font-weight: 600; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #FF5A6E; margin-top: 3px; }
+    .dot { color: #E2001A; }
+    .brand__sub { font-family: var(--r-display); font-weight: 600; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #FF4D5E; margin-top: 3px; }
 
     .nav { flex: 1; padding: 8px 0 16px; }
-    .nav__section { margin: 0; padding: 16px 20px 6px; font-family: var(--r-display); font-weight: 600; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #6B6E77; }
-    .nav__link { display: flex; align-items: center; gap: 12px; padding: 9px 20px 9px 17px; border-left: 3px solid transparent; color: #C9CBD1; text-decoration: none; font-size: 15px; font-weight: 500; }
+    .nav__section { margin: 0; padding: 16px 20px 6px; font-family: var(--r-display); font-weight: 600; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6E73; }
+    .nav__link { display: flex; align-items: center; gap: 12px; padding: 9px 20px 9px 17px; border-left: 3px solid transparent; color: #CACACE; text-decoration: none; font-size: 15px; font-weight: 500; }
     .nav__link .bi { font-size: 16px; width: 18px; text-align: center; color: #8A8D96; }
     .nav__link:hover { color: #FFF; background: rgba(255,255,255,.04); }
     .nav__link:hover .bi { color: #FFF; }
-    .nav__link.is-active { color: #FFF; background: rgba(200,16,46,.16); border-left-color: #C8102E; font-weight: 600; }
-    .nav__link.is-active .bi { color: #FF5A6E; }
-    .nav__badge { margin-left: auto; min-width: 22px; height: 20px; padding: 0 6px; display: flex; align-items: center; justify-content: center; background: #C8102E; color: #FFF; font-size: 12px; font-weight: 700; }
-    .side__foot { padding: 16px 20px 20px; border-top: 1px solid #2A2C33; }
-    .side__site { color: #C9CBD1; text-decoration: none; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; }
+    .nav__link.is-active { color: #FFF; background: rgba(226,0,26,.16); border-left-color: #E2001A; font-weight: 600; }
+    .nav__link.is-active .bi { color: #FF4D5E; }
+    .nav__badge { margin-left: auto; min-width: 22px; height: 20px; padding: 0 6px; display: flex; align-items: center; justify-content: center; background: #E2001A; color: #FFF; font-size: 12px; font-weight: 700; }
+    .side__foot { padding: 16px 20px 20px; border-top: 1px solid #2A2A2D; }
+    .side__site { color: #CACACE; text-decoration: none; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; }
     .side__site:hover { color: #FFF; }
 
     .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
@@ -211,7 +211,7 @@ const NAV: NavSection[] = [
     .topbar__actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
     .user { display: flex; align-items: center; gap: 10px; padding: 6px 8px; background: none; border: 1px solid transparent; cursor: pointer; font: inherit; color: var(--a-text); text-align: left; }
     .user:hover { border-color: var(--a-line); }
-    .user__avatar { width: 36px; height: 36px; display: grid; place-items: center; background: #15161A; color: #FFF; font-family: var(--r-display); font-weight: 800; font-size: 18px; }
+    .user__avatar { width: 36px; height: 36px; display: grid; place-items: center; background: #0A0A0A; color: #FFF; font-family: var(--r-display); font-weight: 800; font-size: 18px; }
     .user__info { display: flex; flex-direction: column; line-height: 1.2; }
     .user__info strong { font-size: 14px; }
     .user__info small { font-size: 12px; color: var(--a-muted); }
@@ -227,7 +227,7 @@ const NAV: NavSection[] = [
       .side { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); transition: transform .2s; }
       .side.is-open { transform: none; box-shadow: 20px 0 40px rgba(0,0,0,.3); }
       .side__close { display: block; }
-      .backdrop { display: block; position: fixed; inset: 0; background: rgba(13,14,17,.5); z-index: 35; }
+      .backdrop { display: block; position: fixed; inset: 0; background: rgba(10,10,10,.5); z-index: 35; }
       .topbar { padding: 0 16px; }
       .topbar__toggle { display: inline-grid; place-items: center; }
       .topbar__title { font-size: 21px; }

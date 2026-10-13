@@ -102,14 +102,14 @@ function loadGoogleScript(): Promise<any> {
     .hero__eyebrow { color: var(--r-red-soft); }
     .hero__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 76px; line-height: 0.92; text-transform: uppercase; }
     .hero__title span { color: var(--r-red); }
-    .hero__text { margin: 0; font-size: 19px; line-height: 1.55; color: #C9CBD1; }
+    .hero__text { margin: 0; font-size: 19px; line-height: 1.55; color: #CACACE; }
     .hero__slash { position: absolute; right: -120px; bottom: -40px; width: 300px; height: 70%; background: var(--r-red); transform: skewX(-12deg); opacity: 0.9; }
 
     .login__form-wrap { flex: 1 1 420px; min-width: 0; display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
     .login__form { width: 100%; max-width: 420px; background: #FFFFFF; border: 1px solid var(--r-line); border-top: 4px solid var(--r-red); padding: 40px 36px; display: flex; flex-direction: column; gap: 20px; }
     .form__head { display: flex; flex-direction: column; gap: 6px; }
     .form__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 42px; line-height: 1; text-transform: uppercase; }
-    .form__error { margin: 0; padding: 12px 14px; background: #FBE7EA; color: var(--r-red); font-weight: 600; border-left: 4px solid var(--r-red); }
+    .form__error { margin: 0; padding: 12px 14px; background: #FDE6E8; color: var(--r-red); font-weight: 600; border-left: 4px solid var(--r-red); }
     .password { position: relative; display: block; }
     .password .r-input { padding-right: 84px; }
     .password__toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: transparent; border: 0; padding: 8px 10px; font-family: var(--r-display); font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--r-muted); }

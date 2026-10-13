@@ -68,7 +68,7 @@ import { SiteService } from '../../core/services/site.service';
     .social { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--r-line-dark); color: #FFFFFF !important; font-size: 20px; transition: background .15s, border-color .15s; }
     .social:hover { background: var(--r-red); border-color: var(--r-red); }
     .footer__col strong { color: #FFFFFF; font-family: var(--r-display); font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; }
-    .footer__col a { color: #C9CBD1; text-decoration: none; }
+    .footer__col a { color: #CACACE; text-decoration: none; }
     .footer__col a:hover { color: #FFFFFF; }
     .footer__bottom { padding-top: 20px; padding-bottom: 32px; border-top: 1px solid var(--r-line-dark); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; font-size: 13px; }
   `],

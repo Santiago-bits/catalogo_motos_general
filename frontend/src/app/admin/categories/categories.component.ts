@@ -174,16 +174,16 @@ interface CategoryForm {
     </app-modal>
   `,
   styles: [`
-    .del-warn { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; margin-bottom: 18px; background: #FBE7EA; border-left: 4px solid #C8102E; }
-    .del-warn > .bi { color: #C8102E; font-size: 26px; line-height: 1; }
+    .del-warn { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; margin-bottom: 18px; background: #FDE6E8; border-left: 4px solid #E2001A; }
+    .del-warn > .bi { color: #E2001A; font-size: 26px; line-height: 1; }
     .del-title { margin: 0; font-size: 16px; line-height: 1.45; }
     .r-tabs-mini { display: flex; flex-wrap: wrap; border: 1px solid var(--a-line); }
     .r-tabs-mini button { border: 0; background: #FFF; padding: 6px 12px; font-family: var(--r-display); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; color: var(--a-muted); }
     .r-tabs-mini button.is-on { background: var(--a-text); color: #FFF; }
-    .img-pick { display: flex; align-items: center; gap: 12px; padding: 10px; border: 2px dashed #C9CBD1; background: #FAFAF8; cursor: pointer; }
+    .img-pick { display: flex; align-items: center; gap: 12px; padding: 10px; border: 2px dashed #CACACE; background: #FAFAF8; cursor: pointer; }
     .img-pick:hover { border-color: var(--a-red); background: #FFF; }
     .img-pick img, .img-pick__empty { width: 72px; height: 54px; object-fit: cover; flex-shrink: 0; }
-    .img-pick__empty { display: grid; place-items: center; background: #EEEDEA; color: #B4B4B4; font-size: 22px; }
+    .img-pick__empty { display: grid; place-items: center; background: #EEEEEE; color: #B4B4B4; font-size: 22px; }
     .img-pick__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
     .img-pick__text strong { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .img-pick__text small { font-size: 12px; color: var(--a-muted); }

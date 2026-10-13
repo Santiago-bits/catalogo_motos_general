@@ -87,11 +87,11 @@ const REASON_LABELS: Record<string, string> = {
   styles: [`
     .current { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
     .current strong { font-family: var(--r-display); font-weight: 800; font-size: 40px; line-height: 1; }
-    .types { display: grid; grid-template-columns: repeat(3, 1fr); border: 2px solid #15161A; }
+    .types { display: grid; grid-template-columns: repeat(3, 1fr); border: 2px solid #0A0A0A; }
     .types button { border: 0; background: #FFF; min-height: 42px; font-family: var(--r-display); font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; justify-content: center; }
-    .types button[aria-checked="true"] { background: #15161A; color: #FFF; }
-    .result { margin-top: 16px; padding: 12px 14px; background: #F3F2EF; border-left: 4px solid #1F7A45; }
-    .result--bad { border-left-color: #C8102E; color: #C8102E; font-weight: 600; }
+    .types button[aria-checked="true"] { background: #0A0A0A; color: #FFF; }
+    .result { margin-top: 16px; padding: 12px 14px; background: #F4F4F4; border-left: 4px solid #1F7A45; }
+    .result--bad { border-left-color: #E2001A; color: #E2001A; font-weight: 600; }
   `],
 })
 export class StockMoveModalComponent implements OnChanges {

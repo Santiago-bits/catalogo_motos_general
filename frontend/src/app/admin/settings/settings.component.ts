@@ -80,7 +80,7 @@ interface SettingGroup {
   styles: [`
     .img-setting { display: flex; gap: 14px; align-items: flex-start; }
     .img-setting img, .img-empty { width: 128px; height: 86px; object-fit: cover; border: 1px solid var(--a-line); flex-shrink: 0; }
-    .img-empty { display: grid; place-items: center; background: #F3F2EF; color: #B4B4B4; font-size: 24px; }
+    .img-empty { display: grid; place-items: center; background: #F4F4F4; color: #B4B4B4; font-size: 24px; }
   `],
 })
 export class SettingsComponent implements OnInit {

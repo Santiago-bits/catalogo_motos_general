@@ -85,7 +85,7 @@ import { SiteService } from '../../core/services/site.service';
 
     .header__actions { display: flex; align-items: center; gap: 18px; }
     .cta { font-size: 17px; padding: 13px 22px; }
-    .icon-link { position: relative; color: #C9CBD1; display: inline-flex; padding: 6px; }
+    .icon-link { position: relative; color: #CACACE; display: inline-flex; padding: 6px; }
     .icon-link:hover { color: #FFFFFF; }
     .badge { position: absolute; top: -4px; right: -8px; background: var(--r-red); color: #FFFFFF; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; padding: 0 5px; display: flex; align-items: center; justify-content: center; }
 

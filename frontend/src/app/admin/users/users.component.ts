@@ -139,7 +139,7 @@ interface UserForm {
       </ng-container>
     </app-modal>
   `,
-  styles: [`.avatar { width: 38px; height: 38px; flex-shrink: 0; display: grid; place-items: center; background: #15161A; color: #FFF; font-family: var(--r-display); font-weight: 800; font-size: 18px; }`],
+  styles: [`.avatar { width: 38px; height: 38px; flex-shrink: 0; display: grid; place-items: center; background: #0A0A0A; color: #FFF; font-family: var(--r-display); font-weight: 800; font-size: 18px; }`],
 })
 export class UsersComponent implements OnInit {
   private api = inject(AdminApiService);

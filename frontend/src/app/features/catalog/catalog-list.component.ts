@@ -141,16 +141,16 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
   `,
   styles: [`
     .filters { margin-top: -36px; position: relative; }
-    .filters__form { background: #FFFFFF; box-shadow: 0 18px 40px rgba(13,14,17,0.18); padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; align-items: end; }
+    .filters__form { background: #FFFFFF; box-shadow: 0 18px 40px rgba(10,10,10,0.18); padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; align-items: end; }
     .filters__btn { min-height: 48px; padding: 0 24px; }
     .filters__toggle { display: none; }
     @media (max-width: 640px) {
       .filters { margin-top: -28px; }
-      .filters__toggle { width: 100%; min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 10px; background: #FFFFFF; border: 0; border-top: 4px solid var(--r-red); box-shadow: 0 14px 30px rgba(13,14,17,0.16); font-family: var(--r-display); font-weight: 700; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--r-ink); cursor: pointer; }
+      .filters__toggle { width: 100%; min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 10px; background: #FFFFFF; border: 0; border-top: 4px solid var(--r-red); box-shadow: 0 14px 30px rgba(10,10,10,0.16); font-family: var(--r-display); font-weight: 700; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--r-ink); cursor: pointer; }
       .filters__count { min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--r-red); color: #FFFFFF; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; letter-spacing: 0; }
       .filters__chev { transition: transform .2s; }
       .filters__toggle[aria-expanded="true"] .filters__chev { transform: rotate(180deg); }
-      .filters__form { display: none; grid-template-columns: 1fr 1fr; gap: 12px; padding: 18px 16px 20px; box-shadow: 0 14px 30px rgba(13,14,17,0.16); }
+      .filters__form { display: none; grid-template-columns: 1fr 1fr; gap: 12px; padding: 18px 16px 20px; box-shadow: 0 14px 30px rgba(10,10,10,0.16); }
       .filters__form.is-open { display: grid; }
       .filters__form .r-field { font-size: 12px; min-width: 0; }
       .filters__form .r-input { min-height: 44px; padding: 8px 10px; font-size: 15px; }

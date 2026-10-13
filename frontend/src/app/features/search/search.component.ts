@@ -45,7 +45,7 @@ import { ProductCardComponent } from '../../shared/product-card.component';
   `,
   styles: [`
     .bar { margin-top: -36px; position: relative; }
-    .bar__form { background: #FFFFFF; box-shadow: 0 18px 40px rgba(13,14,17,0.18); padding: 28px; display: flex; flex-wrap: wrap; gap: 18px; align-items: end; }
+    .bar__form { background: #FFFFFF; box-shadow: 0 18px 40px rgba(10,10,10,0.18); padding: 28px; display: flex; flex-wrap: wrap; gap: 18px; align-items: end; }
     .bar__field { flex: 1 1 320px; }
     .bar__btn { min-height: 48px; padding: 0 32px; }
     .results { padding-top: 56px; padding-bottom: 96px; }

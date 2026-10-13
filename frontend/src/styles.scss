@@ -4,24 +4,24 @@
    ========================================================================== */
 
 :root {
-  --r-red: #C8102E;
-  --r-red-dark: #9E0C24;
-  --r-red-deep: #A50D26;
-  --r-red-soft: #FF5A6E;
-  --r-ink: #15161A;
-  --r-ink-deep: #0D0E11;
-  --r-ink-2: #23252B;
-  --r-line-dark: #2A2C33;
-  --r-paper: #F3F2EF;
+  --r-red: #E2001A;
+  --r-red-dark: #B00014;
+  --r-red-deep: #B00014;
+  --r-red-soft: #FF4D5E;
+  --r-ink: #0A0A0A;
+  --r-ink-deep: #050505;
+  --r-ink-2: #1C1C1E;
+  --r-line-dark: #2A2A2D;
+  --r-paper: #F4F4F4;
   --r-white: #FFFFFF;
-  --r-line: #E1E0DC;
-  --r-photo: #E9E8E4;
-  --r-input: #C9CBD1;
-  --r-muted: #6B6E77;
-  --r-muted-2: #5A5D66;
-  --r-text-2: #3E4148;
-  --r-label: #4A4D55;
-  --r-grey: #9DA0A8;
+  --r-line: #E2E2E2;
+  --r-photo: #EAEAEA;
+  --r-input: #CACACE;
+  --r-muted: #6E6E73;
+  --r-muted-2: #5C5C61;
+  --r-text-2: #3D3D40;
+  --r-label: #4A4A4E;
+  --r-grey: #9E9EA3;
   --r-whatsapp: #25603D;
   --r-display: 'Barlow Condensed', sans-serif;
   --r-body: 'Barlow', system-ui, sans-serif;
@@ -178,9 +178,9 @@ textarea.r-input { resize: vertical; min-height: 110px; }
 .r-page-head .r-eyebrow { color: var(--r-red-soft); }
 .r-page-head__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 72px; line-height: 0.95; text-transform: uppercase; }
 .r-page-head__title span { color: var(--r-red); }
-.r-page-head__text { margin: 0; font-size: 19px; line-height: 1.55; color: #C9CBD1; max-width: 620px; }
+.r-page-head__text { margin: 0; font-size: 19px; line-height: 1.55; color: #CACACE; max-width: 620px; }
 .r-crumbs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; font-size: 14px; color: var(--r-grey); }
-.r-crumbs a { color: #C9CBD1; text-decoration: none; }
+.r-crumbs a { color: #CACACE; text-decoration: none; }
 .r-crumbs a:hover { color: var(--r-white); }
 
 .r-status { padding: 48px 0; text-align: center; color: var(--r-muted); font-size: 17px; }

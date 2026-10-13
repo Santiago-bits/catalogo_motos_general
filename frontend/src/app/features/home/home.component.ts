@@ -49,7 +49,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
             @if (site.settings()['hero_image']; as heroImage) {
               <img [src]="heroImage" alt="" />
             } @else {
-              <app-moto-icon width="62%" color="#6B6E77" />
+              <app-moto-icon width="62%" color="#6E6E73" />
               <span class="hero__photo-tag">[FOTO DE PORTADA]</span>
             }
           </div>
@@ -108,7 +108,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
               @if (c.image_path) {
                 <img class="cat__img" [src]="c.image_path" [alt]="c.name" loading="lazy" />
               } @else {
-                <app-moto-icon width="80" height="44" color="#C8102E" [strokeWidth]="7" [detailed]="false" />
+                <app-moto-icon width="80" height="44" color="#E2001A" [strokeWidth]="7" [detailed]="false" />
               }
               <span class="cat__name">{{ c.name }}</span>
               <span class="cat__text">{{ categoryText(c) }}</span>
@@ -174,9 +174,9 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
         <h2 class="r-h2">Tomamos tu usada</h2>
         <p class="r-lead">Contanos qué moto tenés y te pasamos una cotización. Si te conviene, la usamos como parte de pago de la nueva.</p>
         <ul class="checks">
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Peritaje en el local, sin cargo</li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Nos ocupamos de la transferencia</li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Combinable con financiación</li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2001A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Peritaje en el local, sin cargo</li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2001A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Nos ocupamos de la transferencia</li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2001A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Combinable con financiación</li>
         </ul>
       </div>
       <form class="tradein__form r-panel" aria-label="Cotizar mi usada" (ngSubmit)="sendTradeIn()">
@@ -197,17 +197,17 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
         <h2 class="r-h2">Por qué comprar con nosotros</h2>
         <div class="why__grid">
           <div class="why__item">
-            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF5A6E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
+            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF4D5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
             <h3 class="r-h3">Garantía oficial</h3>
             <p>0 km con garantía de fábrica y usadas revisadas en nuestro taller antes de la venta.</p>
           </div>
           <div class="why__item">
-            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF5A6E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg>
+            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF4D5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg>
             <h3 class="r-h3">Taller propio</h3>
             <p>Service oficial con técnicos capacitados y repuestos originales.</p>
           </div>
           <div class="why__item">
-            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF5A6E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M8 9h8M8 13h8M8 17h5"></path></svg>
+            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF4D5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M8 9h8M8 13h8M8 17h5"></path></svg>
             <h3 class="r-h3">Trámites resueltos</h3>
             <p>Patentamiento, seguro y transferencia: te la entregamos lista para rodar.</p>
           </div>
@@ -285,7 +285,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
         @if (mapUrl(); as url) {
           <iframe [src]="url" title="Mapa del showroom" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         } @else {
-          <svg aria-hidden="true" width="56" height="56" viewBox="0 0 24 24" fill="#C8102E" stroke="none"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></svg>
+          <svg aria-hidden="true" width="56" height="56" viewBox="0 0 24 24" fill="#E2001A" stroke="none"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></svg>
           <span class="visit__map-tag">[MAPA]</span>
         }
       </div>
@@ -300,7 +300,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .hero__copy .r-h1 { font-size: clamp(48px, 5.6vw, 96px); line-height: 0.95; }
     .hero__eyebrow { font-size: 18px; color: var(--r-red-soft); }
     .hero__accent { color: var(--r-red); }
-    .hero__text { margin: 0; font-size: 20px; line-height: 1.55; color: #C9CBD1; max-width: 520px; white-space: pre-line; }
+    .hero__text { margin: 0; font-size: 20px; line-height: 1.55; color: #CACACE; max-width: 520px; white-space: pre-line; }
     .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
     .hero__btn { padding: 16px 30px; }
     .hero__media { flex: 1 1 520px; min-width: 0; position: relative; }
@@ -316,7 +316,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 
     /* Buscador */
     .finder { margin-top: -84px; position: relative; }
-    .finder__form { background: #FFFFFF; border-top: 4px solid var(--r-red); box-shadow: 0 24px 50px rgba(13,14,17,0.16); padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .finder__form { background: #FFFFFF; border-top: 4px solid var(--r-red); box-shadow: 0 24px 50px rgba(10,10,10,0.16); padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 20px; }
     .finder__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding-bottom: 18px; border-bottom: 1px solid var(--r-line); }
     .finder__title { margin: 0; display: flex; align-items: center; gap: 12px; font-family: var(--r-display); font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
     .finder__mark { width: 10px; height: 26px; background: var(--r-red); transform: skewX(-12deg); display: inline-block; }
@@ -390,7 +390,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .why__inner { padding-top: 88px; padding-bottom: 88px; display: flex; flex-direction: column; gap: 44px; text-align: center; }
     .why__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
     .why__item { display: flex; flex-direction: column; align-items: center; gap: 14px; border-top: 3px solid var(--r-red); padding-top: 22px; }
-    .why__item p { margin: 0; color: #C9CBD1; line-height: 1.55; max-width: 340px; }
+    .why__item p { margin: 0; color: #CACACE; line-height: 1.55; max-width: 340px; }
 
     /* Service / accesorios */
     .duo { padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 24px; }
@@ -427,7 +427,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .visit__list a { color: var(--r-ink); text-decoration: none; }
     .visit__list a:hover { color: var(--r-red); }
     .visit__btn { padding: 16px 28px; }
-    .visit__map { flex: 1 1 520px; min-width: 0; min-height: 380px; background: #E2E1DC; border: 1px solid #D3D2CD; position: relative; display: flex; align-items: center; justify-content: center; }
+    .visit__map { flex: 1 1 520px; min-width: 0; min-height: 380px; background: #E2E2E2; border: 1px solid #D4D4D4; position: relative; display: flex; align-items: center; justify-content: center; }
     .visit__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .visit__map-tag { position: absolute; bottom: 14px; left: 16px; font-size: 13px; letter-spacing: 0.16em; color: var(--r-muted); }
 
