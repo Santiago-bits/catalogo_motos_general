@@ -19,10 +19,12 @@ class SearchController extends Controller
 
         $products = Product::query()
             ->active()
+            // El cliente busca por modelo, marca o tipo de moto (no por código interno).
             ->where(function ($query) use ($term) {
                 $query->where('name', 'like', "%{$term}%")
-                    ->orWhere('code', 'like', "%{$term}%")
-                    ->orWhere('short_description', 'like', "%{$term}%");
+                    ->orWhere('short_description', 'like', "%{$term}%")
+                    ->orWhereHas('brand', fn ($q) => $q->where('name', 'like', "%{$term}%"))
+                    ->orWhereHas('category', fn ($q) => $q->where('name', 'like', "%{$term}%"));
             })
             ->with(['brand', 'category', 'mainImage', 'moto'])
             ->limit(24)
