@@ -59,21 +59,22 @@ const REASONS: Record<string, string> = {
     </section>
   `,
   styles: [`
-    .contact { padding-top: 64px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }
-    .contact__info { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+    .contact { padding-top: 64px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
+    .contact__info { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 28px; }
     .info { margin: 0; display: flex; flex-direction: column; gap: 18px; font-size: 17px; }
     .info dt { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--r-muted); }
     .info dd { margin: 4px 0 0; }
     .info a { color: var(--r-ink); text-decoration: none; }
     .info a:hover { color: var(--r-red); }
-    .wa { align-self: flex-start; padding: 16px 28px; }
-    .why { display: flex; flex-direction: column; gap: 16px; }
-    .why div { display: flex; flex-direction: column; gap: 4px; border-top: 3px solid var(--r-red); padding-top: 12px; }
+    .wa { padding: 16px 28px; }
+    .why { display: flex; flex-direction: column; gap: 16px; align-self: stretch; }
+    .why div { display: flex; flex-direction: column; align-items: center; gap: 4px; border-top: 3px solid var(--r-red); padding-top: 12px; }
     .why strong { font-family: var(--r-display); font-size: 22px; text-transform: uppercase; }
     .why span { color: var(--r-muted-2); }
-    .contact__form { flex: 1 1 520px; min-width: 0; padding: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+    .contact__form { flex: 1 1 520px; min-width: 0; padding: 32px; text-align: center; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
     .form__title { grid-column: 1 / -1; margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 36px; line-height: 1; text-transform: uppercase; }
-    .form__hint { margin: -6px 0 0; color: var(--r-muted-2); line-height: 1.45; }
+    .form__hint { grid-column: 1 / -1; margin: -6px 0 0; color: var(--r-muted-2); line-height: 1.45; }
+    .contact__form .r-input { text-align: center; text-align-last: center; }
     .full { grid-column: 1 / -1; }
     .submit { min-height: 52px; }
     .form-error { margin: 0; color: var(--r-red); font-weight: 600; }
