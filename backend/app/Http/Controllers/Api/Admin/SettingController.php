@@ -17,11 +17,10 @@ class SettingController extends Controller
      */
     public const GROUPS = [
         ['key' => 'marca', 'label' => 'Marca y logo', 'icon' => 'badge-tm', 'settings' => [
-            'logo_mode' => ['label' => 'Qué mostrar como logo', 'type' => 'select', 'options' => ['' => 'Automático (texto si hay nombre cargado)', 'texto' => 'Ícono + nombre', 'imagen' => 'Logo en imagen']],
-            'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo, junto al ícono. Ej.: RODADO. Vacío = RODADO.'],
-            'brand_sub' => ['label' => 'Texto secundario', 'type' => 'text', 'help' => 'Texto chico al lado del nombre. Ej.: MOTOS. Vacío = MOTOS.'],
-            'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = sólo el nombre, sin ícono.'],
-            'site_logo' => ['label' => 'Logo en imagen', 'type' => 'image', 'help' => 'Logo completo (dibujo y texto juntos). Se usa en lugar del ícono + nombre cuando "Qué mostrar como logo" está en "Logo en imagen". Ideal PNG o SVG con fondo transparente, horizontal (unos 660 × 144 px) y en versión clara: va sobre fondo oscuro.'],
+            'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo. Ej.: JACOB. Vacío = RODADO.'],
+            'brand_sub' => ['label' => 'Texto secundario', 'type' => 'text', 'help' => 'Texto chico al lado del nombre. Ej.: MOTOR. Vacío = MOTOS.'],
+            'site_logo' => ['label' => 'Imagen del logo', 'type' => 'image', 'help' => 'PNG o SVG con fondo transparente, en versión clara (va sobre fondo oscuro). Para usarla junto al nombre conviene cuadrada (256 × 256 px); como logo completo, horizontal (unos 660 × 144 px).'],
+            'logo_mode' => ['label' => 'Cómo se muestra', 'type' => 'select', 'options' => ['' => 'Imagen a la izquierda del nombre', 'imagen' => 'Solo la imagen (logo completo)', 'texto' => 'Solo el nombre'], 'help' => 'Sin imagen cargada se muestra siempre el nombre.'],
         ]],
         ['key' => 'contacto', 'label' => 'Contacto', 'icon' => 'telephone', 'settings' => [
             'contact_address' => ['label' => 'Dirección del showroom', 'type' => 'text', 'help' => 'Se usa también para el mapa del inicio.'],
@@ -97,7 +96,7 @@ class SettingController extends Controller
             Setting::set($key, '');
         } else {
             // El logo puede ser SVG; las fotos, sólo formatos de imagen comunes.
-            $mimes = in_array($key, ['site_logo', 'brand_icon'], true) ? 'mimes:jpg,jpeg,png,webp,svg' : 'mimes:jpg,jpeg,png,webp';
+            $mimes = $key === 'site_logo' ? 'mimes:jpg,jpeg,png,webp,svg' : 'mimes:jpg,jpeg,png,webp';
             $request->validate(['image' => ['required', 'file', $mimes, 'max:6144']]);
             $path = $request->file('image')->store('site', 'public');
             $this->deleteStored($old);

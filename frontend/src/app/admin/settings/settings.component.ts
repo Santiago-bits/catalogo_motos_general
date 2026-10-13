@@ -53,7 +53,7 @@ interface SettingGroup {
                           <span class="img-empty"><i class="bi bi-image"></i></span>
                         }
                         <div class="stack" style="gap:8px;flex:1">
-                          <input class="form-control" type="file" [accept]="s.key === 'site_logo' || s.key === 'brand_icon' ?'image/png,image/jpeg,image/webp,image/svg+xml' : 'image/png,image/jpeg,image/webp'" (change)="uploadImage(s.key, $event)" />
+                          <input class="form-control" type="file" [accept]="s.key === 'site_logo' ?'image/png,image/jpeg,image/webp,image/svg+xml' : 'image/png,image/jpeg,image/webp'" (change)="uploadImage(s.key, $event)" />
                           @if (values[s.key]) { <button type="button" class="btn btn-danger btn-sm" style="align-self:flex-start" (click)="removeImage(s.key)">Quitar imagen</button> }
                         </div>
                       </div>

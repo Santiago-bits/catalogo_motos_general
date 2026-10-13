@@ -18,18 +18,13 @@ export class SiteService {
   companyName = computed(() =>
     `${this.brandName()} ${this.brandSub()}`.toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()),
   );
-  brandIcon = computed(() => this.settings()['brand_icon'] || '');
   /**
-   * Logo en imagen a mostrar, o '' para usar ícono + nombre.
-   * "Qué mostrar" decide; en automático gana el texto si hay un nombre cargado.
+   * Configuración → Marca y logo: una sola imagen y "Cómo se muestra".
+   * logoImage: la imagen sola, en lugar del nombre ('imagen').
+   * brandIcon: la imagen a la izquierda del nombre (opción por defecto).
    */
-  logoImage = computed(() => {
-    const s = this.settings();
-    const logo = s['site_logo'] || '';
-    if (s['logo_mode'] === 'imagen') return logo;
-    if (s['logo_mode'] === 'texto') return '';
-    return s['brand_name']?.trim() ? '' : logo;
-  });
+  logoImage = computed(() => (this.settings()['logo_mode'] === 'imagen' ? this.settings()['site_logo'] || '' : ''));
+  brandIcon = computed(() => (this.settings()['logo_mode'] ? '' : this.settings()['site_logo'] || ''));
   whatsappUrl = computed(() => {
     const number = (this.settings()['contact_whatsapp'] || '').replace(/\D/g, '');
     return number ? `https://wa.me/${number}` : '';
