@@ -306,12 +306,11 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .hero__media { flex: 1 1 520px; min-width: 0; position: relative; }
     .hero__slash { position: absolute; inset: 8% -20% 8% 10%; background: var(--r-red); transform: skewX(-12deg); }
     .hero__photo { position: relative; aspect-ratio: 4 / 3; background: var(--r-ink-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #34363E; overflow: hidden; }
-    /* Con imagen cargada el recuadro toma la proporción de la foto: se ve entera, sin recortes. */
-    /* Recuadro grande (todo el ancho de la columna y casi todo el alto de pantalla):
-       la imagen entra entera, sea vertical u horizontal, sin recortes. */
-    .hero__photo--img { aspect-ratio: auto; background: transparent; border: 0; width: 100%; height: max(460px, calc(100vh - 200px)); }
-    .hero__photo--img img { position: static; display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0,0,0,0.4)); }
-    @media (max-width: 900px) { .hero__photo--img { height: auto; } .hero__photo--img img { height: auto; max-height: 80vh; } }
+    /* Con imagen cargada el recuadro toma la forma de la foto, sin bandas vacías:
+       una panorámica ocupa todo el ancho; una vertical, casi todo el alto de pantalla. */
+    .hero__photo--img { aspect-ratio: auto; background: transparent; border: 0; width: fit-content; max-width: 100%; margin: 0 auto; overflow: visible; }
+    .hero__photo--img img { position: static; display: block; width: auto; max-width: 100%; height: auto; max-height: max(420px, calc(100vh - 200px)); filter: drop-shadow(0 24px 40px rgba(0,0,0,0.4)); }
+    @media (max-width: 900px) { .hero__photo--img img { max-height: 80vh; } }
     .hero__photo-tag { font-family: var(--r-display); font-size: 16px; letter-spacing: 0.18em; color: var(--r-grey); }
 
     /* Buscador */
