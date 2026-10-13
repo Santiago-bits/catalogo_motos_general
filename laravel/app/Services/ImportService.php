@@ -263,7 +263,7 @@ class ImportService
                 DB::transaction(function () use ($data, $type, $updateExisting, $userId, &$result) {
                     $productData = $data['p'];
                     if (! empty($data['brand'])) {
-                        $productData['brand_id'] = self::brandId($data['brand']);
+                        $productData['brand_id'] = self::brandId($data['brand'], $type);
                     }
                     if (! empty($data['category'])) {
                         $productData['category_id'] = self::categoryId($data['category'], $type);
@@ -443,11 +443,16 @@ class ImportService
     // Auxiliares
     // ------------------------------------------------------------------
 
-    private static function brandId(string $name): int
+    private static function brandId(string $name, string $type): int
     {
         $brand = Brand::whereRaw('LOWER(name) = ?', [mb_strtolower($name)])->first();
+        if ($brand) {
+            $brand->addGroup($type);
 
-        return $brand?->id ?? Brand::create(['name' => $name, 'slug' => Str::slug($name).'-'.Str::lower(Str::random(3)), 'active' => true])->id;
+            return $brand->id;
+        }
+
+        return Brand::create(['name' => $name, 'slug' => Str::slug($name).'-'.Str::lower(Str::random(3)), 'groups' => [$type], 'active' => true])->id;
     }
 
     private static function categoryId(string $name, string $type): int

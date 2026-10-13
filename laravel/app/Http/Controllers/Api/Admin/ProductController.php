@@ -115,6 +115,7 @@ class ProductController extends Controller
 
         $product = DB::transaction(function () use ($data, $detail, $tagIds, $specs) {
             $product = Product::create($data);
+            $product->brand?->addGroup($product->type);
             $this->syncDetail($product, $detail);
             $product->tags()->sync($tagIds ?? []);
             $this->syncSpecs($product, $specs);
@@ -149,6 +150,7 @@ class ProductController extends Controller
         $changes = DB::transaction(function () use ($product, $data, $detail, $tagIds, $specs) {
             $product->update($data);
             $changes = ActivityLog::diff($product);
+            $product->brand?->addGroup($product->type);
 
             $detailModel = $this->syncDetail($product, $detail);
             if ($detailModel) {
