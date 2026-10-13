@@ -66,7 +66,7 @@ class ProductController extends Controller
             ->type($type)
             ->active()
             ->where('slug', $slug)
-            ->with(['brand', 'category', 'images', 'tags', 'moto', 'casco', 'repuesto', 'featureValues.feature', 'videos', 'documents' => fn ($q) => $q->where('is_public', true)])
+            ->with(['brand', 'category', 'images', 'tags', 'moto', 'casco', 'repuesto.compatibility.brand', 'featureValues.feature', 'videos', 'documents' => fn ($q) => $q->where('is_public', true)])
             ->firstOrFail();
 
         $product->increment('views');
