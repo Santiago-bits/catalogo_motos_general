@@ -16,7 +16,7 @@ export interface Paginated<T> {
   to?: number | null;
 }
 
-export interface AdminBrand { id: number; name: string; slug: string; logo_path: string | null; active: boolean; products_count?: number; }
+export interface AdminBrand { id: number; name: string; slug: string; groups?: ProductType[]; logo_path: string | null; active: boolean; products_count?: number; }
 export interface AdminCategory { id: number; group: ProductType; name: string; slug: string; image_path?: string | null; parent_id: number | null; parent?: { id: number; name: string } | null; sort_order: number; active: boolean; products_count?: number; }
 export interface AdminTag { id: number; name: string; slug: string; color: string; products_count?: number; }
 export interface AdminFeature { id: number; name: string; slug: string; unit: string | null; value_type: 'text' | 'number'; sort_order: number; }

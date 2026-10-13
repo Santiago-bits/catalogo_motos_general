@@ -23,13 +23,13 @@ class CatalogSeeder extends Seeder
         $motoBrands = collect(['Honda', 'Yamaha', 'Kawasaki', 'Suzuki', 'Bajaj', 'Motomel'])
             ->mapWithKeys(fn ($name) => [$name => Brand::firstOrCreate(
                 ['slug' => Str::slug($name)],
-                ['name' => $name, 'active' => true]
+                ['name' => $name, 'groups' => ['moto'], 'active' => true]
             )]);
 
         $helmetBrands = collect(['Shoei', 'LS2', 'AGV', 'Peels'])
             ->mapWithKeys(fn ($name) => [$name => Brand::firstOrCreate(
                 ['slug' => Str::slug($name)],
-                ['name' => $name, 'active' => true]
+                ['name' => $name, 'groups' => ['casco'], 'active' => true]
             )]);
 
         $motoCategories = collect(['Naked', 'Scooter', 'Enduro', 'Cruiser'])

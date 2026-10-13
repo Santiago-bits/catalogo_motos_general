@@ -153,7 +153,7 @@ const CODE_TYPES = [
                   <label class="form-label" for="brand_id">Marca</label>
                   <select class="form-select" id="brand_id" name="brand_id" [(ngModel)]="form.brand_id">
                     <option [ngValue]="null">Sin marca</option>
-                    @for (b of brands(); track b.id) { <option [ngValue]="b.id">{{ b.name }}</option> }
+                    @for (b of sectionBrands(); track b.id) { <option [ngValue]="b.id">{{ b.name }}</option> }
                   </select>
                 </div>
                 @if (type === 'moto') {
@@ -352,7 +352,7 @@ const CODE_TYPES = [
                     <div class="form-grid" style="margin-top:14px">
                       <select class="form-select" name="cp-brand" [(ngModel)]="newCompat.brand_id">
                         <option [ngValue]="null">Marca</option>
-                        @for (b of brands(); track b.id) { <option [ngValue]="b.id">{{ b.name }}</option> }
+                        @for (b of motoBrands(); track b.id) { <option [ngValue]="b.id">{{ b.name }}</option> }
                       </select>
                       <input class="form-control" name="cp-model" [(ngModel)]="newCompat.model" placeholder="Modelo *" />
                       <input class="form-control" type="number" name="cp-from" [(ngModel)]="newCompat.year_from" placeholder="Desde (año)" />
@@ -609,6 +609,10 @@ export class ProductFormComponent implements OnInit {
   canEdit = computed(() => (this.isEdit() ? this.auth.can('products.edit') : this.auth.can('products.create')));
 
   brands = signal<AdminBrand[]>([]);
+  /** Marcas de la sección del producto (más la que ya tenga asignada, aunque sea de otra). */
+  sectionBrands = () => this.brands().filter((b) => b.groups?.includes(this.type) || b.id === this.form.brand_id);
+  /** Para "Compatible con": sólo marcas de motos. */
+  motoBrands = () => this.brands().filter((b) => b.groups?.includes('moto'));
   categories = signal<AdminCategory[]>([]);
   tags = signal<AdminTag[]>([]);
   features = signal<AdminFeature[]>([]);

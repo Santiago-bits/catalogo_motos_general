@@ -198,7 +198,7 @@ export class CatalogListComponent implements OnInit {
 
   ngOnInit(): void {
     this.type = this.route.snapshot.data['type'] as ProductType;
-    this.catalog.brands().subscribe((brands) => this.brands.set(brands));
+    this.catalog.brands(this.type).subscribe((brands) => this.brands.set(brands));
     this.catalog.categories(this.type).subscribe((categories) => this.categories.set(categories));
 
     this.route.queryParamMap.subscribe((params) => {

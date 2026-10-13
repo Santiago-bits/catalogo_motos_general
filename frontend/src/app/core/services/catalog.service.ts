@@ -36,8 +36,10 @@ export class CatalogService {
     return this.http.get<{ data: Product[] }>(`${this.baseUrl}/buscar`, { params: { q: term } });
   }
 
-  brands(): Observable<BrandRef[]> {
-    return this.http.get<BrandRef[]>(`${this.baseUrl}/marcas`);
+  /** Marcas activas; con sección, sólo las de esa sección (motos, cascos o repuestos). */
+  brands(group?: ProductType): Observable<BrandRef[]> {
+    const params = group ? new HttpParams().set('grupo', group) : undefined;
+    return this.http.get<BrandRef[]>(`${this.baseUrl}/marcas`, { params });
   }
 
   categories(group?: ProductType): Observable<CategoryRef[]> {

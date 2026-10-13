@@ -12,9 +12,9 @@ use Illuminate\Validation\Rule;
 
 class BrandController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Brand::withCount('products')->orderBy('name')->get();
+        return Brand::withCount('products')->inGroup($request->query('grupo'))->orderBy('name')->get();
     }
 
     public function store(Request $request)
@@ -73,8 +73,10 @@ class BrandController extends Controller
     {
         return $request->validate([
             'name' => ['required', 'string', 'max:120', Rule::unique('brands', 'name')->ignore($brand?->id)],
+            'groups' => ['required', 'array', 'min:1'],
+            'groups.*' => [Rule::in(Brand::GROUPS)],
             'active' => ['boolean'],
-        ], ['name.unique' => 'Ya existe una marca con ese nombre.']);
+        ], ['name.unique' => 'Ya existe una marca con ese nombre.', 'groups.required' => 'Elegí al menos una sección.', 'groups.min' => 'Elegí al menos una sección.']);
     }
 
     private function uniqueSlug(string $name, ?int $ignore = null): string

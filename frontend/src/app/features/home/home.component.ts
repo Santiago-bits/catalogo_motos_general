@@ -493,7 +493,7 @@ export class HomeComponent implements OnInit {
       error: () => this.loadingFeatured.set(false),
     });
     this.catalog.categories('moto').subscribe((c) => this.categories.set(c));
-    this.catalog.brands().subscribe((b) => this.brands.set(b));
+    this.catalog.brands('moto').subscribe((b) => this.brands.set(b));
   }
 
   categoryText(c: CategoryRef): string {

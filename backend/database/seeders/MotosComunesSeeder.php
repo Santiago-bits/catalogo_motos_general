@@ -82,9 +82,12 @@ class MotosComunesSeeder extends Seeder
     {
         $brand = Brand::whereRaw('UPPER(name) = ?', [mb_strtoupper($name)])->first();
 
+        $brand?->addGroup('moto');
+
         return $brand?->id ?? Brand::create([
             'name' => mb_strtoupper($name),
             'slug' => Str::slug($name),
+            'groups' => ['moto'],
             'active' => true,
         ])->id;
     }
