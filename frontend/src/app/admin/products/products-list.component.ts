@@ -330,7 +330,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   async remove(p: any): Promise<void> {
-    if (!(await this.ui.confirm(`¿Eliminar «${p.name}»? Deja de verse en el sitio y en el panel.`, { title: 'Eliminar producto', confirmLabel: 'Eliminar', danger: true }))) return;
+    if (!(await this.ui.confirm(`¿Eliminar «${p.name}» para siempre? Se borran también sus fotos, manuales y videos. No se puede deshacer.`, { title: 'Eliminar producto', confirmLabel: 'Eliminar', danger: true }))) return;
     this.api.delete(`productos/${p.id}`).subscribe({
       next: () => {
         this.ui.success('Producto eliminado.');

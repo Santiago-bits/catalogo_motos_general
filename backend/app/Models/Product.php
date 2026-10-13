@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -125,6 +127,26 @@ class Product extends Model
     public function scopeFeatured($query)
     {
         return $query->where('featured', true);
+    }
+
+    /**
+     * Borra el producto para siempre: la fila (y en cascada fotos, detalle, stock, etc.)
+     * y los archivos que subió el panel (fotos, miniaturas, manuales y videos).
+     * Consultas y cotizaciones quedan, sin el vínculo al producto.
+     */
+    public function purge(): void
+    {
+        $files = $this->images()->get(['path', 'thumb_path'])
+            ->flatMap(fn (ProductImage $image) => [$image->path, $image->thumb_path])
+            ->merge($this->documents()->pluck('path'))
+            ->merge($this->videos()->pluck('path'))
+            ->filter()
+            // Las fotos se guardan como URL completa; manuales y videos, como ruta relativa.
+            ->map(fn (string $file) => Str::contains($file, '/storage/') ? Str::after($file, '/storage/') : $file)
+            ->filter(fn (string $relative) => Str::startsWith($relative, 'products/'));
+
+        $this->forceDelete();
+        Storage::disk('public')->delete($files->values()->all());
     }
 
     protected static function booted(): void
