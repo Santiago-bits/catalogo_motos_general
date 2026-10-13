@@ -35,8 +35,8 @@ return [
         ],
     ],
 
-    // "Iniciar sesión con Google" del panel. El ID de cliente también se puede
-    // cargar desde Configuración (tiene prioridad). ca_bundle sólo hace falta
+    // "Iniciar sesión con Google" del panel. Si GOOGLE_CLIENT_ID está vacío se usa
+    // el ID guardado en la base (settings.google_client_id). ca_bundle sólo hace falta
     // si el PHP local no tiene certificados raíz configurados (curl error 60).
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),

@@ -94,5 +94,7 @@ Si un cambio trae migraciones nuevas, correrlas una vez por SSH:
 
 ### Login con Google
 
-Cargar el *Client ID* en el panel (*Configuración → Acceso*) y en Google Cloud Console agregar
-`https://tu-dominio.com` como origen autorizado de JavaScript.
+El *Client ID* (proyecto "Catalogo Motos" en Google Cloud) está guardado en la base; para cambiarlo,
+cargar `GOOGLE_CLIENT_ID` en `public_html/laravel/.env`. En Google Cloud Console el dominio tiene que
+figurar como origen autorizado de JavaScript, y mientras la app esté en modo prueba cada cuenta
+que entre con Google tiene que estar en *Público → Usuarios de prueba*.

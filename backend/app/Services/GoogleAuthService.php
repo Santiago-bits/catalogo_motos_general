@@ -23,7 +23,7 @@ class GoogleAuthService
 
     public static function clientId(): string
     {
-        return trim((string) (Setting::get('google_client_id', '') ?: config('services.google.client_id', '')));
+        return trim((string) (config('services.google.client_id') ?: Setting::get('google_client_id', '')));
     }
 
     public static function isConfigured(): bool
