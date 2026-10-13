@@ -16,11 +16,12 @@ class SettingController extends Controller
      * type: text | textarea | email | url | tel | select | bool | image
      */
     public const GROUPS = [
-        ['key' => 'marca', 'label' => 'Marca (logo con texto)', 'icon' => 'badge-tm', 'settings' => [
-            'logo_mode' => ['label' => 'Qué mostrar como logo', 'type' => 'select', 'options' => ['' => 'Automático (texto si hay nombre cargado)', 'texto' => 'Ícono + nombre', 'imagen' => 'Logo en imagen (Imágenes del sitio)']],
+        ['key' => 'marca', 'label' => 'Marca y logo', 'icon' => 'badge-tm', 'settings' => [
+            'logo_mode' => ['label' => 'Qué mostrar como logo', 'type' => 'select', 'options' => ['' => 'Automático (texto si hay nombre cargado)', 'texto' => 'Ícono + nombre', 'imagen' => 'Logo en imagen']],
             'brand_name' => ['label' => 'Nombre de la marca', 'type' => 'text', 'help' => 'Texto grande del logo, junto al ícono. Ej.: RODADO. Vacío = RODADO.'],
             'brand_sub' => ['label' => 'Texto secundario', 'type' => 'text', 'help' => 'Texto chico al lado del nombre. Ej.: MOTOS. Vacío = MOTOS.'],
             'brand_icon' => ['label' => 'Ícono (a la izquierda del nombre)', 'type' => 'image', 'help' => 'Imagen cuadrada, ideal 256 × 256 px, PNG o SVG con fondo transparente. Vacío = sólo el nombre, sin ícono.'],
+            'site_logo' => ['label' => 'Logo en imagen', 'type' => 'image', 'help' => 'Logo completo (dibujo y texto juntos). Se usa en lugar del ícono + nombre cuando "Qué mostrar como logo" está en "Logo en imagen". Ideal PNG o SVG con fondo transparente, horizontal (unos 660 × 144 px) y en versión clara: va sobre fondo oscuro.'],
         ]],
         ['key' => 'contacto', 'label' => 'Contacto', 'icon' => 'telephone', 'settings' => [
             'contact_address' => ['label' => 'Dirección del showroom', 'type' => 'text', 'help' => 'Se usa también para el mapa del inicio.'],
@@ -43,7 +44,6 @@ class SettingController extends Controller
             'financing_details' => ['label' => 'Detalle de planes y tasas', 'type' => 'textarea', 'help' => 'Se muestra en la franja de financiación del inicio.'],
         ]],
         ['key' => 'imagenes', 'label' => 'Imágenes del sitio', 'icon' => 'image', 'settings' => [
-            'site_logo' => ['label' => 'Logo del sitio', 'type' => 'image', 'help' => 'Reemplaza a "RODADO. MOTOS" en el encabezado, el pie, el login y el panel. Ideal PNG o SVG con fondo transparente, en versión clara (va sobre fondo oscuro).'],
             'hero_image' => ['label' => 'Foto de portada', 'type' => 'image', 'help' => 'Horizontal, ideal 1600 × 1200 px.'],
             'service_image' => ['label' => 'Foto del taller', 'type' => 'image'],
             'accessories_image' => ['label' => 'Foto de indumentaria', 'type' => 'image'],
