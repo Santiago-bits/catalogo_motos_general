@@ -171,7 +171,7 @@ class ProductController extends Controller
     public function destroy(Request $request, Product $product)
     {
         ActivityLog::log($request->user()->id, 'eliminar', 'Product', $product->id, "Eliminó el producto \"{$product->name}\" ({$product->code})");
-        $product->delete();
+        $product->purge();
 
         return response()->json(['ok' => true]);
     }
