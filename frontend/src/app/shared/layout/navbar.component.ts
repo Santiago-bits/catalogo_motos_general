@@ -35,9 +35,9 @@ import { SiteService } from '../../core/services/site.service';
           <nav aria-label="Principal" class="nav">
             <a routerLink="/motos" [queryParams]="{ condicion: 'nueva' }">0 km</a>
             <a routerLink="/motos" [queryParams]="{ condicion: 'usada' }">Usadas</a>
+            <a routerLink="/repuestos">Repuestos y accesorios</a>
             <a routerLink="/" fragment="financiacion">Financiación</a>
             <a routerLink="/servicios">Service</a>
-            <a routerLink="/repuestos">Repuestos y accesorios</a>
             <a routerLink="/contacto">Contacto</a>
           </nav>
 
