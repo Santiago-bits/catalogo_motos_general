@@ -10,11 +10,14 @@ export class SiteService {
   settings = signal<Record<string, string>>({});
 
   phone = computed(() => this.settings()['contact_phone'] || '');
-  email = computed(() => this.settings()['contact_email'] || '');
   address = computed(() => this.settings()['contact_address'] || '');
   /** Logo con texto (Configuración → Marca); se usa cuando no hay "Logo del sitio" en imagen. */
   brandName = computed(() => this.settings()['brand_name']?.trim() || 'RODADO');
   brandSub = computed(() => this.settings()['brand_sub']?.trim() || 'MOTOS');
+  /** Nombre comercial para textos: "Jacob Motor", "Rodado Motos". */
+  companyName = computed(() =>
+    `${this.brandName()} ${this.brandSub()}`.toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()),
+  );
   brandIcon = computed(() => this.settings()['brand_icon'] || '');
   /**
    * Logo en imagen a mostrar, o '' para usar ícono + nombre.
@@ -54,7 +57,11 @@ export class SiteService {
     if (this.loaded) return;
     this.loaded = true;
     this.catalog.settings().subscribe({
-      next: (s) => this.settings.set(s ?? {}),
+      next: (s) => {
+        this.settings.set(s ?? {});
+        // El panel pone su propio título en cada pantalla.
+        if (!location.pathname.startsWith('/admin')) document.title = `${this.companyName()} — Concesionaria`;
+      },
       error: () => (this.loaded = false),
     });
   }

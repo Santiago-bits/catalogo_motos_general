@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * PDFs del panel: tabla genérica (exportaciones) y catálogo con fotos.
- * Basado en PdfService de SH Servicios, con los colores de RODADO.
+ * Basado en PdfService de SH Servicios, con los colores del sitio.
  */
 class PdfService
 {
@@ -45,9 +45,9 @@ class PdfService
     {
         $pdf = new Pdf('L');
         $pdf->setMargins(12, 16, 12, 16);
-        $pdf->setMeta($title, self::companyName());
+        $pdf->setMeta($title, Setting::companyName());
 
-        $company = self::companyName();
+        $company = Setting::companyName();
         $generated = now()->format('d/m/Y H:i');
 
         $pdf->setFooter(static function (Pdf $pdf) use ($company, $generated): void {
@@ -165,14 +165,13 @@ class PdfService
     {
         $pdf = new Pdf('P');
         $pdf->setMargins(14, 14, 14, 20);
-        $pdf->setMeta($title, self::companyName());
+        $pdf->setMeta($title, Setting::companyName());
 
         $company = [
-            'name' => self::companyName(),
-            'taxid' => (string) Setting::get('legal_cuit', ''),
+            'name' => Setting::companyName(),
             'address' => (string) Setting::get('contact_address', ''),
             'phone' => (string) Setting::get('contact_phone', ''),
-            'email' => (string) Setting::get('contact_email', ''),
+            'whatsapp' => (string) Setting::get('contact_whatsapp', ''),
         ];
 
         $pdf->setHeader(static fn (Pdf $pdf) => self::header($pdf, $company, mb_strtoupper($title), now()->format('m/Y')));
@@ -329,18 +328,17 @@ class PdfService
 
         $pdf->setFont('B', 16);
         $pdf->setTextColor('#FFFFFF');
-        $pdf->text(14, 14, 'RODADO.');
+        $pdf->text(14, 14, mb_strtoupper((string) (Setting::get('brand_name') ?: 'RODADO')).'.');
         $pdf->setFont('', 8);
         $pdf->setTextColor('#9DA0A8');
-        $pdf->text(14, 19.5, 'MOTOS · CONCESIONARIO');
+        $pdf->text(14, 19.5, mb_strtoupper((string) (Setting::get('brand_sub') ?: 'MOTOS')).' · CONCESIONARIO');
 
         $pdf->setFont('', 7);
         $pdf->setTextColor('#BBBBBB');
         $lines = array_values(array_filter([
-            $company['taxid'] !== '' ? 'CUIT '.$company['taxid'] : '',
             $company['address'],
+            $company['whatsapp'] !== '' ? 'WhatsApp '.$company['whatsapp'] : '',
             $company['phone'] !== '' ? 'Tel. '.$company['phone'] : '',
-            $company['email'],
         ]));
         $y = 8;
         foreach (array_slice($lines, 0, 4) as $line) {
@@ -374,13 +372,6 @@ class PdfService
         $pdf->text(14, $y, $company.'  ·  Precios y disponibilidad sujetos a cambios sin previo aviso.');
         $page = 'Página '.$pdf->pageNumber();
         $pdf->text($pdf->pageWidth() - 14 - $pdf->textWidth($page, 7), $y, $page);
-    }
-
-    private static function companyName(): string
-    {
-        $name = (string) Setting::get('site_name', '');
-
-        return $name !== '' && $name !== 'Catálogo Motos' ? $name : 'RODADO Motos';
     }
 
     private static function cellText(mixed $value): string

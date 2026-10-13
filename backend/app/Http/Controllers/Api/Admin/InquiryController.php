@@ -98,7 +98,7 @@ class InquiryController extends Controller
             $number = '54'.$number;
         }
 
-        $company = Setting::get('site_name', 'RODADO Motos');
+        $company = Setting::companyName();
         $text = "Hola {$inquiry->name}, te escribimos de {$company} por tu consulta"
             .($inquiry->product ? " sobre {$inquiry->product->name}" : '').'.';
 

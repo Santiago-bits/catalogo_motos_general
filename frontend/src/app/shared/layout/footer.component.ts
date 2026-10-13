@@ -11,7 +11,7 @@ import { SiteService } from '../../core/services/site.service';
       <div class="footer__grid r-container">
         <div class="footer__col">
           @if (site.logoImage(); as logo) {
-            <img class="footer__logo" [src]="logo" [alt]="site.settings()['site_name'] || 'Logo'" />
+            <img class="footer__logo" [src]="logo" [alt]="site.companyName()" />
           } @else {
             <span class="footer__brand">
               @if (site.brandIcon(); as icon) { <img class="footer__icon" [src]="icon" alt="" /> }
@@ -50,7 +50,7 @@ import { SiteService } from '../../core/services/site.service';
         </div>
       </div>
       <div class="footer__bottom r-container">
-        <span>&copy; {{ year }} {{ site.settings()['site_name'] || site.brandName() + ' ' + site.brandSub() }}{{ site.settings()['legal_name'] ? ' · ' + site.settings()['legal_name'] : '' }}{{ site.settings()['legal_cuit'] ? ' · ' + site.settings()['legal_cuit'] : '' }}</span>
+        <span>&copy; {{ year }} {{ site.companyName() }}</span>
         <span>Precios y disponibilidad sujetos a cambios sin previo aviso.</span>
       </div>
     </footer>

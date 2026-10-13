@@ -229,9 +229,7 @@ class CatalogSeeder extends Seeder
         }
 
         // --- Configuración del sitio ---------------------------------------
-        Setting::set('site_name', 'Catálogo Motos');
         Setting::set('contact_phone', '+54 9 11 5555-5555');
-        Setting::set('contact_email', 'contacto@catalogomotos.test');
         Setting::set('contact_whatsapp', '5491155555555');
         Setting::set('contact_address', 'Av. Siempre Viva 123, Buenos Aires');
         Setting::set('currency_default', 'ARS');

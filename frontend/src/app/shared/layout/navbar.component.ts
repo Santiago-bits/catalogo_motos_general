@@ -15,7 +15,7 @@ import { SiteService } from '../../core/services/site.service';
       <div class="header__inner r-container">
         <a routerLink="/" class="brand" (click)="open.set(false)">
           @if (site.logoImage(); as logo) {
-            <img class="brand__logo" [src]="logo" [alt]="site.settings()['site_name'] || 'Inicio'" />
+            <img class="brand__logo" [src]="logo" [alt]="site.companyName()" />
           } @else {
           @if (site.brandIcon(); as icon) {
             <img class="brand__icon" [src]="icon" alt="" />

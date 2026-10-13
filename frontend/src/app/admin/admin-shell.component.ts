@@ -290,7 +290,7 @@ export class AdminShellComponent implements OnInit {
     while (child.firstChild) child = child.firstChild;
     const title = child.snapshot.data['title'] as string | undefined;
     this.title.set(title ?? 'Panel');
-    document.title = `${title ?? 'Panel'} · Panel RODADO`;
+    document.title = `${title ?? 'Panel'} · Panel ${this.site.companyName()}`;
 
     this.api.counters().subscribe({ next: (c) => this.ui.counters.set(c), error: () => undefined });
   }

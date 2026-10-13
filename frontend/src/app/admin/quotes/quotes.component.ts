@@ -5,6 +5,7 @@ import { AdminApiService } from '../core/admin-api.service';
 import { AuthService } from '../core/auth.service';
 import { QUOTE_STATUS, date, money, num } from '../core/labels';
 import { UiService } from '../core/ui.service';
+import { SiteService } from '../../core/services/site.service';
 import { ModalComponent } from '../shared/modal.component';
 import { PagerComponent } from '../shared/pager.component';
 
@@ -105,7 +106,7 @@ export class QuotesComponent implements OnInit {
     const digits = String(q?.phone ?? '').replace(/\D+/g, '');
     if (!digits) return null;
     const number = digits.length <= 11 && !digits.startsWith('54') ? '54' + digits : digits;
-    return `https://wa.me/${number}?text=${encodeURIComponent(`Hola ${q.name}, te escribimos de RODADO Motos por tu cotización ${q.number}.`)}`;
+    return `https://wa.me/${number}?text=${encodeURIComponent(`Hola ${q.name}, te escribimos de ${this.site.companyName()} por tu cotización ${q.number}.`)}`;
   }
 
   private api = inject(AdminApiService);
@@ -113,6 +114,7 @@ export class QuotesComponent implements OnInit {
   private router = inject(Router);
   private ui = inject(UiService);
   auth = inject(AuthService);
+  private site = inject(SiteService);
 
   quotes = signal<any[]>([]);
   detail = signal<any | null>(null);
