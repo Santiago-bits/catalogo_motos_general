@@ -184,6 +184,16 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
             </div>
           }
 
+          @if (p.compatibility?.length) {
+            <div class="block r-panel">
+              <h2 class="block__title">Compatible con</h2>
+              <ul class="compat">
+                @for (moto of p.compatibility; track moto) { <li>{{ moto }}</li> }
+              </ul>
+              <p class="compat__hint">¿No está tu moto? Consultanos por WhatsApp y te decimos si te sirve.</p>
+            </div>
+          }
+
           @if (videos().length) {
             <div class="block r-panel">
               @for (v of videos(); track v.key) {
@@ -270,6 +280,9 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
     .tech div { padding: 12px 0; border-bottom: 1px solid var(--r-line); }
     .tech dt { font-size: 12px; color: var(--r-muted); text-transform: uppercase; letter-spacing: 0.08em; }
     .tech dd { margin: 4px 0 0; font-weight: 600; }
+    .compat { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .compat li { padding: 8px 14px; border: 1px solid var(--r-line); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; font-size: 15px; }
+    .compat__hint { margin: 0; color: var(--r-muted); font-size: 15px; }
     .wa-hint { margin: -6px 0 0; color: var(--r-muted-2); font-size: 15px; line-height: 1.45; }
     .video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
     .video iframe, .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }

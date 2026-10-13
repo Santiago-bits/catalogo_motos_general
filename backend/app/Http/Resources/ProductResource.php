@@ -58,6 +58,15 @@ class ProductResource extends JsonResource
             'moto' => $this->whenLoaded('moto', fn () => $this->moto),
             'casco' => $this->whenLoaded('casco', fn () => $this->casco),
             'repuesto' => $this->whenLoaded('repuesto', fn () => $this->repuesto),
+            // "Honda CG 150 Titan 2016-2020": con qué motos va el repuesto (sólo en la ficha).
+            'compatibility' => $this->when(
+                $this->relationLoaded('repuesto') && $this->repuesto?->relationLoaded('compatibility'),
+                fn () => $this->repuesto->compatibility->map(fn ($c) => trim(implode(' ', array_filter([
+                    $c->brand?->name && ! str_starts_with(mb_strtolower($c->model), mb_strtolower($c->brand->name)) ? $c->brand->name : null,
+                    $c->model,
+                    $c->year_from ? ($c->year_to && $c->year_to !== $c->year_from ? "{$c->year_from}-{$c->year_to}" : (string) $c->year_from) : null,
+                ]))))->values(),
+            ),
             'public_documents' => $this->when(! $this instanceof AdminProductResource && $this->relationLoaded('documents'), fn () => $this->documents->map(fn ($doc) => [
                 'title' => $doc->title,
                 'kind' => $doc->kind,

@@ -62,6 +62,8 @@ export interface Product {
   moto?: Record<string, unknown>;
   casco?: Record<string, unknown>;
   repuesto?: Record<string, unknown>;
+  /** Motos con las que va el repuesto (sólo en la ficha). */
+  compatibility?: string[];
   public_videos?: { title: string | null; url: string; is_file: boolean }[];
   public_documents?: { title: string; kind: string; url: string }[];
   views: number;
