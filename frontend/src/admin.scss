@@ -325,3 +325,70 @@
 .adm .news-body p, .adm .news-body li { line-height: 1.6; }
 .adm .news-body ul { padding-left: 20px; }
 .adm .news-body article + article { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--a-line); }
+
+/* =====================================================================
+   Responsive del panel (tablet y celular). Sólo presentación: centra
+   títulos y subtítulos y reacomoda filtros, tarjetas y tablas para que
+   todo se lea bien en pantallas chicas. No cambia ninguna función.
+   ===================================================================== */
+@media (max-width: 1000px) {
+  /* Títulos de tarjetas y de secciones, centrados. */
+  .adm .card-admin__head { flex-direction: column; justify-content: center; text-align: center; }
+  .adm .card-admin__head h2 { justify-content: center; flex-wrap: wrap; text-align: center; }
+  .adm .card-admin__head h2 .count { flex-basis: 100%; }
+  .adm .card-admin__head > input,
+  .adm .card-admin__head > .form-control,
+  .adm .card-admin__head > .form-select { max-width: 100% !important; width: 100%; }
+  .adm .card-admin__head > .row-gap,
+  .adm .card-admin__head > .r-tabs-mini { justify-content: center; }
+  .adm .form-section__title { justify-content: center; text-align: center; }
+  .adm .card-admin__foot { justify-content: center; text-align: center; }
+  .adm .empty-state { padding: 36px 16px; }
+
+  /* Encabezado de la ficha de producto. */
+  .adm .pform-header { text-align: center; }
+  .adm .breadcrumbs { justify-content: center; }
+  .adm .pform-header__row { justify-content: center; }
+  .adm .pform-title { font-size: 30px; }
+
+  /* Filtros: campos parejos y botones a lo ancho. */
+  .adm .admin-filters .f-field,
+  .adm .admin-filters .f-field--wide { max-width: none; flex: 1 1 200px; }
+  .adm .admin-filters .f-actions { margin-left: 0; flex: 1 1 100%; justify-content: center; flex-wrap: wrap; }
+
+  /* Pestañas de la ficha: se deslizan de costado sin cortarse. */
+  .adm .form-tabs { scrollbar-width: none; }
+  .adm .form-tabs::-webkit-scrollbar { display: none; }
+  .adm .form-tab { white-space: nowrap; flex: 0 0 auto; }
+
+  .adm .alert { justify-content: center; text-align: center; }
+  .adm .stat-card { align-items: center; text-align: center; }
+}
+
+@media (max-width: 640px) {
+  .adm .card-admin__head { padding: 14px; }
+  .adm .card-admin__head h2 { font-size: 18px; }
+  .adm .card-admin__body { padding: 14px; }
+  .adm .pform-title { font-size: 26px; }
+
+  /* Estadísticas de a dos. */
+  .adm .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .adm .stat-card { padding: 14px 12px; }
+
+  /* Filtros de a uno y botones del mismo ancho. */
+  .adm .admin-filters { padding: 12px; }
+  .adm .admin-filters .f-field,
+  .adm .admin-filters .f-field--wide { flex-basis: 100%; }
+  .adm .admin-filters .f-actions > * { flex: 1 1 0; justify-content: center; }
+
+  /* Tablas: se deslizan de costado y las celdas respiran menos. */
+  .adm .table-admin th, .adm .table-admin td { padding: 10px; }
+  .adm .table-admin { min-width: 560px; }
+
+  /* Pie de las tarjetas y de los modales: botones apilados a lo ancho. */
+  .adm .card-admin__foot { flex-direction: column; }
+  .adm-modal { max-width: none; }
+  .adm-modal__head { padding: 14px 16px; }
+  .adm-modal__foot { flex-direction: column-reverse; padding: 12px 16px; }
+  .adm-modal__foot > * { width: 100%; justify-content: center; }
+}

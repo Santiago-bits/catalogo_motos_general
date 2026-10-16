@@ -230,7 +230,8 @@ const NAV: NavSection[] = [
       .backdrop { display: block; position: fixed; inset: 0; background: rgba(10,10,10,.5); z-index: 35; }
       .topbar { padding: 0 16px; }
       .topbar__toggle { display: inline-grid; place-items: center; }
-      .topbar__title { font-size: 21px; }
+      .topbar__title { font-size: 21px; flex: 1; text-align: center; }
+      .topbar__actions { margin-left: 0; }
       .user__info, .user .bi-chevron-down { display: none; }
       .force-pw { padding: 10px 16px; }
       .content { padding: 22px 16px 48px; }
