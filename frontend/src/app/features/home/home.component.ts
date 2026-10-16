@@ -311,6 +311,15 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .hero__photo--img { aspect-ratio: auto; background: transparent; border: 0; width: fit-content; max-width: 100%; margin: 0 auto; overflow: visible; }
     .hero__photo--img img { position: static; display: block; width: auto; max-width: 100%; height: auto; max-height: max(420px, calc(100vh - 200px)); filter: drop-shadow(0 24px 40px rgba(0,0,0,0.4)); }
     @media (max-width: 900px) { .hero__photo--img img { max-height: 80vh; } }
+    /* Tablet / ventana mediana: la foto ya pasó abajo del texto, así que todo va centrado. */
+    @media (max-width: 1100px) {
+      .hero__inner { gap: 36px; padding-top: 40px; }
+      .hero__copy { flex-basis: 100%; align-items: center; text-align: center; }
+      .hero__copy .r-h1 { font-size: clamp(44px, 7.5vw, 76px); }
+      .hero__actions { justify-content: center; }
+      .hero__media { flex-basis: 100%; }
+      .hero__slash { inset: 10% -8% 10% 12%; }
+    }
     .hero__photo-tag { font-family: var(--r-display); font-size: 16px; letter-spacing: 0.18em; color: var(--r-grey); }
 
     /* Buscador */
