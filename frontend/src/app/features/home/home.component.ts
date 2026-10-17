@@ -295,7 +295,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     /* Hero */
     .hero { background: var(--r-ink); color: #FFFFFF; position: relative; overflow: hidden; }
     .hero__inner { padding-top: 48px; padding-bottom: 132px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
-    .hero__copy { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+    .hero__copy { flex: 0 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
     /* El título se achica con la pantalla para que el hero entre completo al abrir la página. */
     .hero__copy .r-h1 { font-size: clamp(48px, 5.6vw, 96px); line-height: 0.95; }
     .hero__eyebrow { font-size: 18px; color: var(--r-red-soft); }
@@ -303,13 +303,14 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .hero__text { margin: 0; font-size: 20px; line-height: 1.55; color: #CACACE; max-width: 520px; white-space: pre-line; }
     .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
     .hero__btn { padding: 16px 30px; }
-    .hero__media { flex: 1.4 1 560px; min-width: 0; position: relative; }
+    /* La foto se queda con todo el ancho que no usa el texto: así una panorámica se ve grande. */
+    .hero__media { flex: 1 1 560px; min-width: 0; position: relative; }
     .hero__slash { position: absolute; inset: 8% -20% 8% 10%; background: var(--r-red); transform: skewX(-12deg); }
     .hero__photo { position: relative; aspect-ratio: 4 / 3; background: var(--r-ink-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #34363E; overflow: hidden; }
     /* Con imagen cargada el recuadro toma la forma de la foto, sin bandas vacías:
        una panorámica ocupa todo el ancho; una vertical, casi todo el alto de pantalla. */
-    .hero__photo--img { aspect-ratio: auto; background: transparent; border: 0; width: fit-content; max-width: 100%; margin: 0 auto; overflow: visible; }
-    .hero__photo--img img { position: static; display: block; width: auto; max-width: 100%; height: auto; max-height: max(420px, calc(100vh - 200px)); filter: drop-shadow(0 24px 40px rgba(0,0,0,0.4)); }
+    .hero__photo--img { aspect-ratio: auto; background: transparent; border: 0; width: 100%; max-width: 100%; margin: 0 auto; overflow: visible; }
+    .hero__photo--img img { position: static; display: block; width: 100%; max-width: 100%; object-fit: contain; height: auto; max-height: max(420px, calc(100vh - 200px)); filter: drop-shadow(0 24px 40px rgba(0,0,0,0.4)); }
     @media (max-width: 900px) { .hero__photo--img img { max-height: 80vh; } }
     /* Tablet / ventana mediana: la foto ya pasó abajo del texto, así que todo va centrado. */
     @media (max-width: 1100px) {
