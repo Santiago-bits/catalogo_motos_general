@@ -192,13 +192,3 @@ textarea.r-input { resize: vertical; min-height: 110px; }
   .r-page-head__title { font-size: 48px; }
   .r-section { padding-top: 64px; padding-bottom: 64px; }
 }
-
-/* Efectos al hacer scroll (directiva appReveal): sólo se ocultan si el script marcó html.anim */
-html.anim .reveal, html.anim .stagger > * { transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
-html.anim .reveal:not(.is-in) { opacity: 0; transform: translateY(48px); }
-html.anim .stagger:not(.is-in) > * { opacity: 0; transform: translateY(56px) scale(.97); }
-html.anim .stagger.is-in > * { transition-delay: calc(var(--i, 0) * 110ms); }
-@media (prefers-reduced-motion: reduce) {
-  html.anim .reveal:not(.is-in), html.anim .stagger:not(.is-in) > * { opacity: 1; transform: none; }
-  html.anim .reveal, html.anim .stagger > * { transition: none; }
-}

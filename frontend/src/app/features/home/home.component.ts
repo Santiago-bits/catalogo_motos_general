@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, OnInit, afterNextRender, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
@@ -7,7 +7,6 @@ import { SiteService } from '../../core/services/site.service';
 import { BrandRef, CategoryRef, Product } from '../../core/models/product.model';
 import { MotoIconComponent } from '../../shared/moto-icon.component';
 import { ProductCardComponent } from '../../shared/product-card.component';
-import { CountUpDirective, RevealDirective } from '../../shared/scroll-fx';
 
 type Condition = 'todas' | 'nueva' | 'usada';
 
@@ -30,18 +29,12 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, FormsModule, ProductCardComponent, MotoIconComponent, RevealDirective, CountUpDirective],
+  imports: [RouterLink, FormsModule, ProductCardComponent, MotoIconComponent],
   template: `
-    <!-- Avance de la página: la moto recorre la línea mientras se baja -->
-    <div class="ride" aria-hidden="true">
-      <div class="ride__fill"></div>
-      <span class="ride__moto"><app-moto-icon width="34" height="20" color="#FFFFFF" [strokeWidth]="7" [detailed]="false" /></span>
-    </div>
-
     <!-- Hero -->
     <section class="hero">
       <div class="hero__inner r-container">
-        <div class="hero__copy" data-parallax="0.18">
+        <div class="hero__copy">
           <span class="r-eyebrow hero__eyebrow">Concesionario oficial · 0 km y usadas</span>
           <h1 class="r-h1">Tu próxima moto<br><span class="hero__accent">te está esperando.</span></h1>
           <p class="hero__text">{{ site.settings()['hero_text'] || 'Motos nuevas y usadas seleccionadas, financiación a tu medida y un taller que te acompaña después de la compra.' }}</p>
@@ -51,8 +44,8 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
           </div>
         </div>
         <div class="hero__media">
-          <div class="hero__slash" data-parallax="-0.22" data-skew></div>
-          <div class="hero__photo" data-parallax="0.08" [class.hero__photo--img]="!!site.settings()['hero_image']">
+          <div class="hero__slash"></div>
+          <div class="hero__photo" [class.hero__photo--img]="!!site.settings()['hero_image']">
             @if (site.settings()['hero_image']; as heroImage) {
               <img [src]="heroImage" alt="" />
             } @else {
@@ -105,11 +98,11 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     <!-- Categorías -->
     @if (categories().length) {
       <section class="cats r-container">
-        <div class="section-head" appReveal>
+        <div class="section-head">
           <h2 class="r-h2">Elegí tu estilo</h2>
           <a routerLink="/motos" class="section-link">Ver todas las categorías →</a>
         </div>
-        <div class="cats__grid" appReveal="stagger">
+        <div class="cats__grid">
           @for (c of categories(); track c.id) {
             <a class="cat" routerLink="/motos" [queryParams]="{ categoria: c.slug }">
               @if (c.image_path) {
@@ -127,7 +120,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 
     <!-- Destacadas -->
     <section id="destacadas" class="featured r-container">
-      <div class="section-head" appReveal>
+      <div class="section-head">
         <div class="section-head__titles">
           <span class="r-eyebrow">Stock disponible</span>
           <h2 class="r-h2">Motos destacadas</h2>
@@ -143,7 +136,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
       } @else if (visibleFeatured().length === 0) {
         <p class="r-status">No hay motos destacadas en esta categoría por ahora.</p>
       } @else {
-        <div class="r-grid-cards" appReveal="stagger">
+        <div class="r-grid-cards">
           @for (product of visibleFeatured(); track product.id) {
             <app-product-card [product]="product" />
           }
@@ -157,7 +150,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     <!-- Financiación -->
     <section id="financiacion" class="finance">
       <div class="finance__inner r-container">
-        <div class="finance__copy" appReveal>
+        <div class="finance__copy">
           <span class="r-eyebrow finance__eyebrow">Financiación</span>
           <h2 class="finance__title">Llevátela hoy,<br>pagala en cuotas.</h2>
           <p class="finance__text">Planes con bancos y financieras, cuotas fijas y opción de entregar tu usada como parte de pago.{{ site.settings()['financing_details'] ? ' ' + site.settings()['financing_details'] : '' }}</p>
@@ -165,7 +158,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
             <a routerLink="/contacto" [queryParams]="{ motivo: 'financiacion' }" class="r-btn r-btn--white finance__btn">Pedir simulación</a>
           </div>
         </div>
-        <ol class="finance__steps" appReveal="stagger">
+        <ol class="finance__steps">
           <li><span class="step__num">01</span><strong>Elegí tu moto</strong><span>0 km o usada, del stock o por pedido.</span></li>
           <li><span class="step__num">02</span><strong>Simulá la cuota</strong><span>Te armamos el plan según tu anticipo.</span></li>
           <li><span class="step__num">03</span><strong>Aprobación</strong><span>Presentás la documentación y te avisamos.</span></li>
@@ -176,7 +169,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 
     <!-- Tomamos tu usada -->
     <section id="usada" class="tradein r-container">
-      <div class="tradein__copy" appReveal>
+      <div class="tradein__copy">
         <span class="r-eyebrow">Plan canje</span>
         <h2 class="r-h2">Tomamos tu usada</h2>
         <p class="r-lead">Contanos qué moto tenés y te pasamos una cotización. Si te conviene, la usamos como parte de pago de la nueva.</p>
@@ -186,7 +179,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
           <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2001A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>Combinable con financiación</li>
         </ul>
       </div>
-      <form class="tradein__form r-panel" appReveal aria-label="Cotizar mi usada" (ngSubmit)="sendTradeIn()">
+      <form class="tradein__form r-panel" aria-label="Cotizar mi usada" (ngSubmit)="sendTradeIn()">
         <label class="r-field">Marca<input class="r-input" type="text" name="brand" [(ngModel)]="tradeIn.brand" placeholder="Ej.: Honda" /></label>
         <label class="r-field">Modelo<input class="r-input" type="text" name="model" [(ngModel)]="tradeIn.model" placeholder="Ej.: CB 250 Twister" /></label>
         <label class="r-field">Año<input class="r-input" type="number" name="year" [(ngModel)]="tradeIn.year" placeholder="Ej.: 2021" /></label>
@@ -201,16 +194,8 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     <!-- Por qué elegirnos -->
     <section class="why">
       <div class="why__inner r-container">
-        <h2 class="r-h2" appReveal>Por qué comprar con nosotros</h2>
-        <!-- Cifras reales del catálogo: cuentan desde cero al aparecer -->
-        @if (stats().length) {
-          <div class="stats">
-            @for (st of stats(); track st.label) {
-              <div class="stat"><span class="stat__num" [appCountUp]="st.value"></span><span class="stat__lbl">{{ st.label }}</span></div>
-            }
-          </div>
-        }
-        <div class="why__grid" appReveal="stagger">
+        <h2 class="r-h2">Por qué comprar con nosotros</h2>
+        <div class="why__grid">
           <div class="why__item">
             <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF4D5E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
             <h3 class="r-h3">Garantía oficial</h3>
@@ -231,7 +216,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     </section>
 
     <!-- Service y accesorios -->
-    <section id="service" class="duo r-container" appReveal="stagger">
+    <section id="service" class="duo r-container">
       <div class="duo__card r-panel">
         <div class="duo__photo">
           @if (site.settings()['service_image']; as img) { <img [src]="img" alt="" /> } @else { [FOTO DEL TALLER] }
@@ -256,39 +241,33 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 
     <!-- Marcas -->
     @if (brands().length) {
-      <!-- Dos filas de marcas que se deslizan en sentidos opuestos según cuánto se baja -->
+      <!-- Como en SH: grilla de logos que se adapta sola a la cantidad de marcas -->
       <section class="brands">
         <div class="brands__inner r-container">
-          <div class="section-head" appReveal>
+          <div class="section-head">
             <div class="section-head__titles">
               <span class="r-eyebrow">Marcas</span>
               <h2 class="r-h2">Con las que trabajamos</h2>
             </div>
           </div>
-        </div>
-        <div class="marquee">
-          @for (row of brandRows(); track r; let r = $index) {
-            <div class="marquee__row" [attr.data-slide]="r ? 1 : -1">
-              @for (b of row; track $index) {
-                <!-- Las copias que rellenan la fila no se anuncian ni reciben foco -->
-                <a class="brand-chip" routerLink="/motos" [queryParams]="{ marca: b.slug }" [title]="b.name"
-                   [attr.tabindex]="r || $index >= brands().length ? -1 : null" [attr.aria-hidden]="r || $index >= brands().length ? true : null">
-                  @if (b.logo_path) {
-                    <img [src]="b.logo_path" [alt]="b.name" loading="lazy" />
-                  } @else {
-                    <span>{{ b.name }}</span>
-                  }
-                </a>
-              }
-            </div>
-          }
+          <div class="brand-strip">
+            @for (b of brands(); track b.id) {
+              <a class="brand-cell" routerLink="/motos" [queryParams]="{ marca: b.slug }" [title]="b.name">
+                @if (b.logo_path) {
+                  <img [src]="b.logo_path" [alt]="b.name" loading="lazy" />
+                } @else {
+                  <span>{{ b.name }}</span>
+                }
+              </a>
+            }
+          </div>
         </div>
       </section>
     }
 
     <!-- Contacto -->
     <section id="contacto" class="visit r-container">
-      <div class="visit__copy" appReveal>
+      <div class="visit__copy">
         <span class="r-eyebrow">Visitanos</span>
         <h2 class="r-h2">Vení a conocerlas</h2>
         <dl class="visit__list">
@@ -302,7 +281,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
           <a routerLink="/contacto" class="r-btn r-btn--whatsapp visit__btn">Escribinos</a>
         }
       </div>
-      <div class="visit__map" appReveal>
+      <div class="visit__map">
         @if (mapUrl(); as url) {
           <iframe [src]="url" title="Mapa del showroom" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         } @else {
@@ -313,12 +292,6 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     </section>
   `,
   styles: [`
-    /* Avance de la página (se ubica justo debajo del menú fijo) */
-    .ride { position: fixed; left: 0; right: 0; top: 0; height: 3px; z-index: 21; pointer-events: none; }
-    .ride__fill { position: absolute; inset: 0; background: var(--r-red); transform-origin: left center; transform: scaleX(var(--p, 0)); }
-    .ride__moto { position: absolute; bottom: 3px; left: calc(var(--p, 0) * (100% - 34px)); width: 34px; height: 20px; display: block; line-height: 0; }
-    @media (prefers-reduced-motion: reduce) { .ride { display: none; } }
-
     /* Hero */
     .hero { background: var(--r-ink); color: #FFFFFF; position: relative; overflow: hidden; }
     .hero__inner { padding-top: 48px; padding-bottom: 132px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
@@ -392,13 +365,13 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     /* Destacadas */
     .featured { padding-top: 56px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 32px; }
 
-    /* Financiación: la franja se abre desde el centro al llegar (--clip y --shift los mueve el scroll) */
-    .finance { background: var(--r-red); color: #FFFFFF; clip-path: inset(0 var(--clip, 0%) 0 var(--clip, 0%)); }
+    /* Financiación */
+    .finance { background: var(--r-red); color: #FFFFFF; }
     .finance__inner { padding-top: 80px; padding-bottom: 80px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 48px; align-items: center; }
     .finance__copy { min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
     .finance__eyebrow { color: #FFFFFF; }
     /* Siempre en dos renglones: "Llevátela hoy," / "pagala en cuotas." */
-    .finance__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: clamp(34px, 3.4vw, 56px); line-height: 0.95; text-transform: uppercase; white-space: nowrap; transform: translateX(var(--shift, 0px)); }
+    .finance__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: clamp(34px, 3.4vw, 56px); line-height: 0.95; text-transform: uppercase; white-space: nowrap; }
     .finance__steps li { text-align: center; align-items: center; }
     .finance__text { margin: 0; font-size: 19px; line-height: 1.55; max-width: 480px; }
     .finance__btn { padding: 16px 30px; }
@@ -424,10 +397,6 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     /* Por qué */
     .why { background: var(--r-ink); color: #FFFFFF; }
     .why__inner { padding-top: 88px; padding-bottom: 88px; display: flex; flex-direction: column; gap: 44px; text-align: center; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 28px; padding-bottom: 8px; }
-    .stat { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .stat__num { font-family: var(--r-display); font-weight: 800; font-size: clamp(56px, 7vw, 88px); line-height: 1; color: var(--r-red); font-variant-numeric: tabular-nums; }
-    .stat__lbl { font-family: var(--r-display); font-weight: 600; font-size: 18px; letter-spacing: 0.14em; text-transform: uppercase; color: #CACACE; }
     .why__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
     .why__item { display: flex; flex-direction: column; align-items: center; gap: 14px; border-top: 3px solid var(--r-red); padding-top: 22px; }
     .why__item p { margin: 0; color: #CACACE; line-height: 1.55; max-width: 340px; }
@@ -443,26 +412,20 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     .duo__btn { font-size: 18px; padding: 12px 24px; }
 
     /* Marcas */
-    .brands { border-top: 1px solid var(--r-line); border-bottom: 1px solid var(--r-line); background: #FFFFFF; padding-bottom: 80px; overflow: hidden; }
-    .brands__inner { padding-top: 80px; padding-bottom: 36px; }
-    /* Las filas son más anchas que la pantalla y quedan centradas: sobran logos a ambos lados para deslizarse. */
-    .marquee { display: flex; flex-direction: column; gap: 14px; }
-    .marquee__row { display: flex; justify-content: center; gap: 14px; will-change: transform; }
-    .brand-chip { flex: 0 0 auto; width: 210px; height: 108px; padding: 14px 18px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid var(--r-line); text-decoration: none; position: relative; transition: border-color .15s; }
-    .brand-chip::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--r-red); transform: scaleX(0); transition: transform .2s; }
-    .brand-chip:hover { border-color: var(--r-ink); }
-    .brand-chip:hover::after { transform: scaleX(1); }
-    .brand-chip img { max-height: 70px; max-width: 100%; width: auto; object-fit: contain; filter: grayscale(1); opacity: .7; transition: filter .2s, opacity .2s; }
-    .brand-chip:hover img { filter: none; opacity: 1; }
-    .brand-chip span { font-family: var(--r-display); font-weight: 800; font-style: italic; font-size: 30px; line-height: 1.05; letter-spacing: 0.03em; text-transform: uppercase; text-align: center; color: var(--r-muted); transition: color .15s; }
-    .marquee__row:nth-child(2) .brand-chip span { color: var(--r-red); }
-    .brand-chip:hover span { color: var(--r-ink); }
-    @media (max-width: 640px) {
-      .brands { padding-bottom: 56px; }
-      .brands__inner { padding-top: 56px; padding-bottom: 28px; }
-      .brand-chip { width: 160px; height: 88px; }
-      .brand-chip span { font-size: 24px; }
-    }
+    .brands { border-top: 1px solid var(--r-line); border-bottom: 1px solid var(--r-line); background: #FFFFFF; }
+    .brands__inner { padding-top: 80px; padding-bottom: 80px; display: flex; flex-direction: column; gap: 32px; }
+    /* Flex + wrap: cada marca nueva cae abajo y la última fila se estira para llenar el ancho. */
+    .brand-strip { display: flex; flex-wrap: wrap; gap: 1px; background: var(--r-line); border: 1px solid var(--r-line); }
+    .brand-cell { flex: 1 1 calc(25% - 1px); min-height: 140px; padding: 18px 16px; display: grid; place-items: center; background: #FFFFFF; text-decoration: none; transition: background .15s; position: relative; }
+    .brand-cell::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--r-red); transform: scaleX(0); transition: transform .2s; }
+    .brand-cell:hover { background: var(--r-paper); }
+    .brand-cell:hover::after { transform: scaleX(1); }
+    .brand-cell img { max-height: 78px; max-width: 80%; width: auto; object-fit: contain; filter: grayscale(1); opacity: .7; transition: filter .2s, opacity .2s; }
+    .brand-cell:hover img { filter: none; opacity: 1; }
+    .brand-cell span { font-family: var(--r-display); font-weight: 800; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.05; letter-spacing: 0.04em; text-transform: uppercase; text-align: center; color: var(--r-muted); overflow-wrap: anywhere; transition: color .15s; }
+    .brand-cell:hover span { color: var(--r-ink); }
+    @media (max-width: 991px) { .brand-cell { flex-basis: calc(33.333% - 1px); } }
+    @media (max-width: 640px) { .brand-cell { flex-basis: calc(50% - 1px); min-height: 110px; } .brands__inner { padding-top: 56px; padding-bottom: 56px; } }
 
     /* Visitanos */
     .visit { padding-top: 96px; padding-bottom: 96px; display: flex; flex-wrap: wrap; gap: 48px; }
@@ -504,32 +467,6 @@ export class HomeComponent implements OnInit {
   categories = signal<CategoryRef[]>([]);
   brands = signal<BrandRef[]>([]);
   tab = signal<Condition>('todas');
-  stockTotal = signal(0);
-
-  private host: HTMLElement = inject(ElementRef).nativeElement;
-  private destroyRef = inject(DestroyRef);
-
-  /** Cifras para "Por qué comprar con nosotros": sólo las que tienen valor. */
-  stats = computed(() => {
-    const items = [
-      { value: this.stockTotal(), label: this.stockTotal() === 1 ? 'moto en catálogo' : 'motos en catálogo' },
-      { value: this.brands().length, label: this.brands().length === 1 ? 'marca' : 'marcas' },
-      { value: this.categories().length, label: this.categories().length === 1 ? 'estilo para elegir' : 'estilos para elegir' },
-    ];
-    return items.filter((i) => i.value > 0);
-  });
-
-  /** Filas de marcas: se repiten hasta llenar el ancho de sobra; la segunda va al revés. */
-  brandRows = computed<BrandRef[][]>(() => {
-    const list = this.brands();
-    if (!list.length) return [];
-    const fill = (src: BrandRef[]) => {
-      const out: BrandRef[] = [];
-      while (out.length < Math.max(14, src.length)) out.push(...src);
-      return out;
-    };
-    return [fill(list), fill([...list].reverse())];
-  });
 
   visibleFeatured = computed(() => {
     const tab = this.tab();
@@ -555,13 +492,8 @@ export class HomeComponent implements OnInit {
   tradeInSent = signal(false);
   tradeInError = signal('');
 
-  constructor() {
-    afterNextRender(() => this.startScrollFx());
-  }
-
   ngOnInit(): void {
     this.site.load();
-    this.catalog.list('moto').subscribe({ next: (res) => this.stockTotal.set(res.meta?.total ?? 0), error: () => undefined });
     this.catalog.featured().subscribe({
       next: (res) => {
         const motos = res.data.filter((p) => p.type === 'moto');
@@ -572,68 +504,6 @@ export class HomeComponent implements OnInit {
     });
     this.catalog.categories('moto').subscribe((c) => this.categories.set(c));
     this.catalog.brands('moto').subscribe((b) => this.brands.set(b));
-  }
-
-  /** Efectos atados al scroll: portada en capas, moto de avance, marcas deslizándose y franja que se abre. */
-  private startScrollFx(): void {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        this.updateScrollFx();
-      });
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    this.destroyRef.onDestroy(() => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    });
-    this.updateScrollFx();
-  }
-
-  private updateScrollFx(): void {
-    const y = window.scrollY;
-    const vh = window.innerHeight;
-    const q = (sel: string) => this.host.querySelector<HTMLElement>(sel);
-
-    // Moto de avance: debajo del menú, recorre la línea de 0 a 100 %.
-    const ride = q('.ride');
-    if (ride) {
-      const header = document.querySelector<HTMLElement>('app-navbar .header, .header');
-      ride.style.top = `${Math.max(0, header?.getBoundingClientRect().bottom ?? 0)}px`;
-      const max = document.documentElement.scrollHeight - vh;
-      ride.style.setProperty('--p', String(max > 0 ? Math.min(y / max, 1) : 0));
-    }
-
-    // Portada: texto, foto y franja a distinta velocidad. Con la foto debajo del texto el efecto es más suave.
-    const hero = q('.hero');
-    if (hero && y < hero.offsetTop + hero.offsetHeight) {
-      const soft = window.innerWidth <= 1100 ? 0.35 : 1;
-      this.host.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
-        const shift = y * Number(el.dataset['parallax']) * (el.hasAttribute('data-skew') ? 1 : soft);
-        el.style.transform = `translate3d(0, ${shift}px, 0)` + (el.hasAttribute('data-skew') ? ` skewX(${-12 - y * 0.012}deg)` : '');
-      });
-    }
-
-    // Marcas: cada fila se desliza hacia un lado mientras cruza la pantalla.
-    this.host.querySelectorAll<HTMLElement>('[data-slide]').forEach((row) => {
-      const r = row.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      const progress = (vh - r.top) / (vh + r.height);
-      row.style.transform = `translate3d(${Number(row.dataset['slide']) * (progress * 420 - 210)}px, 0, 0)`;
-    });
-
-    // Financiación: la franja roja se abre desde el centro al acercarse.
-    const finance = q('.finance');
-    if (finance) {
-      const open = Math.max(0, Math.min(1, (vh - finance.getBoundingClientRect().top) / (vh * 0.7)));
-      finance.style.setProperty('--clip', `${(1 - open) * 18}%`);
-      finance.style.setProperty('--shift', `${(1 - open) * -60}px`);
-    }
   }
 
   categoryText(c: CategoryRef): string {
