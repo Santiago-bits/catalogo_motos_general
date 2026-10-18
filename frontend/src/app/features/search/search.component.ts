@@ -4,14 +4,15 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CatalogService } from '../../core/services/catalog.service';
 import { Product } from '../../core/models/product.model';
 import { ProductCardComponent } from '../../shared/product-card.component';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [ProductCardComponent, FormsModule, RouterLink],
+  imports: [ProductCardComponent, FormsModule, RouterLink, ParallaxDirective, RevealDirective],
   template: `
     <section class="r-page-head">
-      <div class="r-page-head__inner r-container">
+      <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
         <nav class="r-crumbs" aria-label="Ruta"><a routerLink="/">Inicio</a><span>/</span><span>Buscar</span></nav>
         <span class="r-eyebrow">Buscador</span>
         <h1 class="r-page-head__title">
@@ -35,7 +36,7 @@ import { ProductCardComponent } from '../../shared/product-card.component';
       } @else if (term() && results().length === 0) {
         <p class="r-status">No encontramos resultados para "{{ term() }}". Probá con otra palabra o <a routerLink="/contacto">consultanos</a>.</p>
       } @else if (results().length) {
-        <div class="r-grid-cards">
+        <div class="r-grid-cards" appReveal="stagger">
           @for (product of results(); track product.id) {
             <app-product-card [product]="product" />
           }

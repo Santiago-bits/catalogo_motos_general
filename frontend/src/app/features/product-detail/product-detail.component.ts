@@ -10,6 +10,7 @@ import { Product, ProductType } from '../../core/models/product.model';
 import { MotoIconComponent } from '../../shared/moto-icon.component';
 import { PricePipe } from '../../shared/price.pipe';
 import { AVAILABILITY } from '../../shared/product-card.component';
+import { RevealDirective } from '../../shared/scroll-fx';
 
 /**
  * Enlace de YouTube o Vimeo → URL del reproductor incrustado.
@@ -75,7 +76,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [FormsModule, RouterLink, MotoIconComponent, PricePipe],
+  imports: [FormsModule, RouterLink, MotoIconComponent, PricePipe, RevealDirective],
   template: `
     @if (product(); as p) {
       <section class="r-page-head head">
@@ -88,7 +89,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
         </div>
       </section>
 
-      <section class="detail r-container">
+      <section class="detail r-container" appReveal="stagger">
         <div class="gallery">
           <div class="gallery__main">
             @if (activeImage(); as img) {
@@ -166,7 +167,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
 
         <div class="info">
           @if (p.description || p.short_description) {
-            <div class="block r-panel">
+            <div class="block r-panel" appReveal>
               <h2 class="block__title">Descripción</h2>
               @if (p.short_description) { <p class="lead">{{ p.short_description }}</p> }
               @if (p.description) { <p class="desc">{{ p.description }}</p> }
@@ -174,7 +175,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
           }
 
           @if (techRows().length) {
-            <div class="block r-panel">
+            <div class="block r-panel" appReveal>
               <h2 class="block__title">Ficha técnica</h2>
               <dl class="tech">
                 @for (row of techRows(); track row.label) {
@@ -185,7 +186,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
           }
 
           @if (p.compatibility?.length) {
-            <div class="block r-panel">
+            <div class="block r-panel" appReveal>
               <h2 class="block__title">Compatible con</h2>
               <ul class="compat">
                 @for (moto of p.compatibility; track moto) { <li>{{ moto }}</li> }
@@ -195,7 +196,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
           }
 
           @if (videos().length) {
-            <div class="block r-panel">
+            <div class="block r-panel" appReveal>
               @for (v of videos(); track v.key) {
                 <div class="video">
                   @if (v.embed) {
@@ -210,7 +211,7 @@ const FIELDS: Record<ProductType, [key: string, label: string, unit?: string][]>
           }
 
           @if (p.public_documents?.length) {
-            <div class="block r-panel">
+            <div class="block r-panel" appReveal>
               <h2 class="block__title">Documentación</h2>
               <ul class="docs">
                 @for (d of p.public_documents; track d.url) {

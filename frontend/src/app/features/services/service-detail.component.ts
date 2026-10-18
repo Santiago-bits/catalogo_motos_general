@@ -1,15 +1,16 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CatalogService } from '../../core/services/catalog.service';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 @Component({
   selector: 'app-service-detail',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ParallaxDirective, RevealDirective],
   template: `
     @if (service(); as s) {
       <section class="r-page-head">
-        <div class="r-page-head__inner r-container">
+        <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
           <nav class="r-crumbs" aria-label="Ruta">
             <a routerLink="/">Inicio</a><span>/</span><a routerLink="/servicios">Servicios</a><span>/</span><span>{{ s.title }}</span>
           </nav>
@@ -19,7 +20,7 @@ import { CatalogService } from '../../core/services/catalog.service';
         </div>
       </section>
 
-      <section class="r-container r-section detail">
+      <section class="r-container r-section detail" appReveal="stagger">
         <div class="r-panel body">
           <p class="description">{{ s.description }}</p>
         </div>

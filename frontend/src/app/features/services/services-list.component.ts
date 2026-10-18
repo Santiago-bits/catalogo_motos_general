@@ -1,14 +1,15 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CatalogService } from '../../core/services/catalog.service';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 @Component({
   selector: 'app-services-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ParallaxDirective, RevealDirective],
   template: `
     <section class="r-page-head">
-      <div class="r-page-head__inner r-container">
+      <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
         <nav class="r-crumbs" aria-label="Ruta"><a routerLink="/">Inicio</a><span>/</span><span>Servicios</span></nav>
         <span class="r-eyebrow">Taller propio</span>
         <h1 class="r-page-head__title">Service y <span>servicios</span></h1>
@@ -22,7 +23,7 @@ import { CatalogService } from '../../core/services/catalog.service';
       } @else if (services().length === 0) {
         <p class="r-status">Pronto vas a ver acá nuestros servicios.</p>
       } @else {
-        <div class="grid">
+        <div class="grid" appReveal="stagger">
           @for (service of services(); track service.id; let i = $index) {
             <a class="card" [routerLink]="['/servicios', service.slug]">
               <span class="card__num">{{ number(i) }}</span>

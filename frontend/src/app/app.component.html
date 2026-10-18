@@ -1,5 +1,6 @@
 @if (!isAdminRoute()) {
   <app-navbar></app-navbar>
+  <app-scroll-ride />
 }
 <main [class.page]="!isAdminRoute()">
   <router-outlet></router-outlet>

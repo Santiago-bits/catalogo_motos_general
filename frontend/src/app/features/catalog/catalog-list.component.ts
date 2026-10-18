@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CatalogService } from '../../core/services/catalog.service';
 import { BrandRef, CatalogFilters, CategoryRef, PaginatedResponse, Product, ProductType } from '../../core/models/product.model';
 import { ProductCardComponent } from '../../shared/product-card.component';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 interface PageCopy {
   eyebrow: string;
@@ -38,10 +39,10 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
 @Component({
   selector: 'app-catalog-list',
   standalone: true,
-  imports: [ProductCardComponent, FormsModule, RouterLink],
+  imports: [ProductCardComponent, FormsModule, RouterLink, ParallaxDirective, RevealDirective],
   template: `
     <section class="r-page-head">
-      <div class="r-page-head__inner r-container">
+      <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
         <nav class="r-crumbs" aria-label="Ruta"><a routerLink="/">Inicio</a><span>/</span><span>{{ heading() }} {{ accent() }}</span></nav>
         <span class="r-eyebrow">{{ copy().eyebrow }}</span>
         <h1 class="r-page-head__title">{{ heading() }} <span>{{ accent() }}</span></h1>
@@ -121,7 +122,7 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
           <button type="button" class="r-btn r-btn--outline" (click)="clear()">Limpiar filtros</button>
         </div>
       } @else {
-        <div class="r-grid-cards">
+        <div class="r-grid-cards" appReveal="stagger">
           @for (product of products(); track product.id) {
             <app-product-card [product]="product" />
           }

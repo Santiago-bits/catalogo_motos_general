@@ -7,6 +7,7 @@ import { Product, ProductType } from '../../core/models/product.model';
 import { MotoIconComponent } from '../../shared/moto-icon.component';
 import { PricePipe } from '../../shared/price.pipe';
 import { AVAILABILITY } from '../../shared/product-card.component';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 const MAX_ITEMS = 4;
 
@@ -132,10 +133,10 @@ interface Row {
 @Component({
   selector: 'app-compare',
   standalone: true,
-  imports: [RouterLink, PricePipe, MotoIconComponent],
+  imports: [RouterLink, PricePipe, MotoIconComponent, ParallaxDirective, RevealDirective],
   template: `
     <section class="r-page-head">
-      <div class="r-page-head__inner r-container">
+      <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
         <nav class="r-crumbs" aria-label="Ruta"><a routerLink="/">Inicio</a><span>/</span><span>Comparar</span></nav>
         <span class="r-eyebrow">Comparador</span>
         <h1 class="r-page-head__title">Compará <span>lado a lado</span></h1>
@@ -168,7 +169,7 @@ interface Row {
           </div>
         </div>
 
-        <div class="table-wrap r-panel">
+        <div class="table-wrap r-panel" appReveal>
           <table class="table" [style.--cols]="columns()">
             <thead>
               <tr>

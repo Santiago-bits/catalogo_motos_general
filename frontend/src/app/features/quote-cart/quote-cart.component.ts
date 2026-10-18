@@ -4,14 +4,15 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
 import { SiteService } from '../../core/services/site.service';
 import { PricePipe } from '../../shared/price.pipe';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 @Component({
   selector: 'app-quote-cart',
   standalone: true,
-  imports: [FormsModule, RouterLink, PricePipe],
+  imports: [FormsModule, RouterLink, PricePipe, ParallaxDirective, RevealDirective],
   template: `
     <section class="r-page-head">
-      <div class="r-page-head__inner r-container">
+      <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
         <nav class="r-crumbs" aria-label="Ruta"><a routerLink="/">Inicio</a><span>/</span><span>Cotizador</span></nav>
         <span class="r-eyebrow">Cotizador</span>
         <h1 class="r-page-head__title">Armá tu <span>presupuesto</span></h1>
@@ -31,7 +32,7 @@ import { PricePipe } from '../../shared/price.pipe';
           <a routerLink="/motos" class="r-btn r-btn--red">Ver motos</a>
         </div>
       } @else {
-        <div class="layout">
+        <div class="layout" appReveal="stagger">
           <div class="r-panel table-wrap">
             <table class="table">
               <thead>

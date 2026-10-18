@@ -1,14 +1,15 @@
 import { Component, OnInit, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SiteService } from '../../core/services/site.service';
+import { RevealDirective } from '../../shared/scroll-fx';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RevealDirective],
   template: `
     <footer class="footer">
-      <div class="footer__grid r-container">
+      <div class="footer__grid r-container" appReveal="stagger">
         <div class="footer__col">
           @if (site.logoImage(); as logo) {
             <img class="footer__logo" [src]="logo" [alt]="site.companyName()" />

@@ -32,12 +32,6 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
   standalone: true,
   imports: [RouterLink, FormsModule, ProductCardComponent, MotoIconComponent, RevealDirective, CountUpDirective],
   template: `
-    <!-- Avance de la página: la moto recorre la línea mientras se baja -->
-    <div class="ride" aria-hidden="true">
-      <div class="ride__fill"></div>
-      <span class="ride__moto"><app-moto-icon width="34" height="20" color="#FFFFFF" [strokeWidth]="7" [detailed]="false" /></span>
-    </div>
-
     <!-- Hero -->
     <section class="hero">
       <div class="hero__inner r-container">
@@ -313,12 +307,6 @@ const PRICE_RANGES = [2000000, 4000000, 8000000, 15000000];
     </section>
   `,
   styles: [`
-    /* Avance de la página (se ubica justo debajo del menú fijo) */
-    .ride { position: fixed; left: 0; right: 0; top: 0; height: 3px; z-index: 21; pointer-events: none; }
-    .ride__fill { position: absolute; inset: 0; background: var(--r-red); transform-origin: left center; transform: scaleX(var(--p, 0)); }
-    .ride__moto { position: absolute; bottom: 3px; left: calc(var(--p, 0) * (100% - 34px)); width: 34px; height: 20px; display: block; line-height: 0; }
-    @media (prefers-reduced-motion: reduce) { .ride { display: none; } }
-
     /* Hero */
     .hero { background: var(--r-ink); color: #FFFFFF; position: relative; overflow: hidden; }
     .hero__inner { padding-top: 48px; padding-bottom: 132px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; }
@@ -574,7 +562,7 @@ export class HomeComponent implements OnInit {
     this.catalog.brands('moto').subscribe((b) => this.brands.set(b));
   }
 
-  /** Efectos atados al scroll: portada en capas, moto de avance, marcas deslizándose y franja que se abre. */
+  /** Efectos atados al scroll: portada en capas, marcas deslizándose y franja que se abre. */
   private startScrollFx(): void {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let ticking = false;
@@ -599,15 +587,6 @@ export class HomeComponent implements OnInit {
     const y = window.scrollY;
     const vh = window.innerHeight;
     const q = (sel: string) => this.host.querySelector<HTMLElement>(sel);
-
-    // Moto de avance: debajo del menú, recorre la línea de 0 a 100 %.
-    const ride = q('.ride');
-    if (ride) {
-      const header = document.querySelector<HTMLElement>('app-navbar .header, .header');
-      ride.style.top = `${Math.max(0, header?.getBoundingClientRect().bottom ?? 0)}px`;
-      const max = document.documentElement.scrollHeight - vh;
-      ride.style.setProperty('--p', String(max > 0 ? Math.min(y / max, 1) : 0));
-    }
 
     // Portada: texto, foto y franja a distinta velocidad. Con la foto debajo del texto el efecto es más suave.
     const hero = q('.hero');

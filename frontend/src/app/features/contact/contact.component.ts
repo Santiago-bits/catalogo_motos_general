@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CatalogService } from '../../core/services/catalog.service';
 import { SiteService } from '../../core/services/site.service';
+import { ParallaxDirective, RevealDirective } from '../../shared/scroll-fx';
 
 const REASONS: Record<string, string> = {
   consulta: 'Consulta general',
@@ -15,10 +16,10 @@ const REASONS: Record<string, string> = {
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, ParallaxDirective, RevealDirective],
   template: `
     <section class="r-page-head">
-      <div class="r-page-head__inner r-container">
+      <div class="r-page-head__inner r-container" [appParallax]="0.3" [fade]="true">
         <nav class="r-crumbs" aria-label="Ruta"><a routerLink="/">Inicio</a><span>/</span><span>Contacto</span></nav>
         <span class="r-eyebrow">Visitanos</span>
         <h1 class="r-page-head__title">Hablemos de <span>tu próxima moto</span></h1>
@@ -27,7 +28,7 @@ const REASONS: Record<string, string> = {
     </section>
 
     <section class="contact r-container">
-      <div class="contact__info">
+      <div class="contact__info" appReveal>
         <dl class="info">
           <div><dt>Showroom</dt><dd>{{ site.address() || 'Consultá la dirección por WhatsApp' }}</dd></div>
           <div><dt>Horarios</dt><dd>{{ site.settings()['business_hours'] || 'Lunes a viernes 9 a 19 h · Sábados 9 a 13 h' }}</dd></div>
@@ -42,7 +43,7 @@ const REASONS: Record<string, string> = {
         </div>
       </div>
 
-      <form class="contact__form r-panel" (ngSubmit)="submit()" aria-label="Formulario de contacto">
+      <form class="contact__form r-panel" appReveal (ngSubmit)="submit()" aria-label="Formulario de contacto">
         <h2 class="form__title">Escribinos por WhatsApp</h2>
         <p class="form__hint full">Completá estos datos y se abre WhatsApp con tu mensaje listo para enviar.</p>
         <label class="r-field">Motivo

@@ -173,7 +173,7 @@ textarea.r-input { resize: vertical; min-height: 110px; }
 .r-tab[aria-selected="true"] { background: var(--r-ink); color: var(--r-white); }
 
 /* ---------- Encabezado de páginas internas ---------- */
-.r-page-head { background: var(--r-ink); color: var(--r-white); }
+.r-page-head { background: var(--r-ink); color: var(--r-white); overflow: hidden; }
 .r-page-head__inner { padding-top: 64px; padding-bottom: 64px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
 .r-page-head .r-eyebrow { color: var(--r-red-soft); }
 .r-page-head__title { margin: 0; font-family: var(--r-display); font-weight: 800; font-size: 72px; line-height: 0.95; text-transform: uppercase; }
@@ -202,3 +202,11 @@ html.anim .stagger.is-in > * { transition-delay: calc(var(--i, 0) * 110ms); }
   html.anim .reveal:not(.is-in), html.anim .stagger:not(.is-in) > * { opacity: 1; transform: none; }
   html.anim .reveal, html.anim .stagger > * { transition: none; }
 }
+
+/* Encabezados de página: miga, título y texto entran uno detrás de otro al abrir la página */
+@keyframes r-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.r-page-head__inner > * { animation: r-rise .7s cubic-bezier(.2, .7, .2, 1) both; }
+.r-page-head__inner > :nth-child(2) { animation-delay: .08s; }
+.r-page-head__inner > :nth-child(3) { animation-delay: .16s; }
+.r-page-head__inner > :nth-child(n + 4) { animation-delay: .24s; }
+@media (prefers-reduced-motion: reduce) { .r-page-head__inner > * { animation: none; } }

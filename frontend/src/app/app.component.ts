@@ -3,11 +3,12 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { FooterComponent } from './shared/layout/footer.component';
 import { NavbarComponent } from './shared/layout/navbar.component';
+import { ScrollRideComponent } from './shared/scroll-fx';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, ScrollRideComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
